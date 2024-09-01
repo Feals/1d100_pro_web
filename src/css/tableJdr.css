@@ -1,0 +1,19 @@
+.table_jdr {
+  display: flex;
+  flex-direction: row;
+  border: 5px solid #d0551c;
+  width: 80vw;
+  margin: auto;
+  justify-content: space-between;
+  background-color: #fdf8e5;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.table_jdr img {
+  width: 25vw;
+}
+
+.edit_button {
+  color: #006685;
+}

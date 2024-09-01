@@ -1,0 +1,113 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 15vh;
+}
+
+#titre_principal {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center; /* Centrer verticalement */
+  height: 15vh;
+  background-color: #006685;
+}
+
+#titre_principal::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100px;
+  background-color: #006685;
+  transform: skewX(-25deg);
+  transform-origin: bottom right;
+}
+#shadow_title {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -40px;
+  width: 40px;
+  background-color: #a9f1ee;
+  transform: skewX(-25deg);
+  transform-origin: bottom right;
+  z-index: 1;
+}
+
+#logo {
+  z-index: 1;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 3vw;
+}
+
+#logo img {
+  width: 90px;
+  height: 90px;
+  padding-right: 2vw;
+}
+
+nav ul {
+  background-color: #a9f1ee;
+  position: relative;
+  list-style-type: none;
+  display: flex;
+  padding: 0.5em;
+}
+
+nav ul::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -20px;
+  width: 40px;
+  background-color: #a9f1ee;
+  transform: skewX(-25deg);
+  transform-origin: bottom left;
+  z-index: -1;
+}
+nav li {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+nav a {
+  font-size: 1.3em;
+  color: #006685;
+  text-decoration: none;
+}
+nav p {
+  font-size: 1.3em;
+  color: #006685;
+  margin: 0;
+  padding: 0;
+  font-family: "Roblox", Arial, sans-serif;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #760001;
+  border-bottom: 3px solid #760001;
+}
+
+h1 {
+  color: #fdf8e5;
+}
+
+h2 {
+  color: #fdf8e5;
+}
+
+section h2 {
+  color: #d0551c;
+  background-color: #a9f1ee;
+}
+h3 {
+  color: #fdf8e5;
+}

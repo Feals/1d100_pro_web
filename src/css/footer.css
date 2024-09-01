@@ -1,0 +1,69 @@
+footer {
+  background-color: #d0551c;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+#footer {
+  display: flex;
+  justify-content: space-between;
+  color: #fdf8e5;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#adresse {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#newsletter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#mentions_legal {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+/* Bouton */
+
+#inscription_table {
+  background-color: #d0551c;
+  color: #fdf8e5;
+  border: none;
+  padding: 20px;
+}
+
+#inscription {
+  background-color: #006685;
+  color: #fdf8e5;
+  border: none;
+  margin-left: 300px;
+  margin-top: 10px;
+}
+
+#recherche {
+  background-color: #fdf8e5;
+  border-color: #d0551c;
+}
+
+#GO {
+  background-color: #d0551c;
+  color: #fdf8e5;
+}
+
+#onglet {
+  margin-top: 10px;
+}
+footer p {
+  margin: 7px;
+}
+h3 {
+  margin: 10px;
+}

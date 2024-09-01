@@ -1,0 +1,75 @@
+#Apropos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#title_page {
+  position: relative;
+  margin: 30px;
+}
+
+#title_page h1 {
+  margin: 0;
+  background-color: #a9f1ee;
+  color: #006685;
+  padding: 30px;
+}
+
+#rectangle1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  width: 15px;
+  height: 15px;
+  z-index: 1;
+}
+
+#rectangle2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: 15px;
+  height: 15px;
+  background-color: white;
+}
+
+#rectangle3 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 15px;
+  height: 15px;
+  background-color: white;
+}
+
+#rectangle4 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  width: 15px;
+  height: 15px;
+  background-color: white;
+}
+
+#Apropos article {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#Apropos p {
+  width: 40vw;
+  max-height: 80vh;
+  margin: 10px;
+}
+
+#Apropos img {
+  max-width: 100%;
+  height: auto;
+  margin: 10px;
+}
