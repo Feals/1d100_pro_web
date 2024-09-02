@@ -2,18 +2,27 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import Accueil from "./pages/Accueil";
-import "./css/global.css";
+import Homepage from "./pages/Homepage";
+import "./assets/css/global.css";
+import { Provider } from "react-redux";
+import store from "./store/store";
+import UserSignUp from "./pages/UserSignUp";
 
 const route = createBrowserRouter([
   {
     path: "/",
-    element: <Accueil />,
+    element: <Homepage />,
+  },
+  {
+    path: "/sign-up",
+    element: <UserSignUp />,
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={route} />
+    <Provider store={store}>
+      <RouterProvider router={route} />
+    </Provider>
   </StrictMode>
 );

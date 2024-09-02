@@ -1,0 +1,18 @@
+const initialState = {
+  token: null,
+};
+
+export default function authReducer(state = initialState, action) {
+  switch (action.type) {
+    case "CREATE_SESSION":
+    case "UPDATE_SESSION":
+      return { ...state, token: action.token };
+    case "LOGOUT":
+      return {
+        ...state,
+        token: null,
+      };
+    default:
+      return state;
+  }
+}
