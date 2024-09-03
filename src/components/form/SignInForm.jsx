@@ -2,54 +2,32 @@ import { Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import FormContainer from "./FormContainer";
 import { useDispatch } from "react-redux";
-import { signUp } from "../../store/action/authAction";
+import { signIn } from "../../store/action/authAction";
 
-const SignupSchema = Yup.object().shape({
-  firstname: Yup.string()
-    .min(2, "Trop court!")
-    .max(50, "Trop long!")
-    .required("Requis"),
-  lastname: Yup.string()
-    .min(2, "Trop court!")
-    .max(50, "Trop long!")
-    .required("Requis"),
+const SigninSchema = Yup.object().shape({
   mail: Yup.string().email("Email invalide").required("Requis"),
   password: Yup.string().min(6, "Mot de passe trop court").required("Requis"),
 });
 
-const SignUpForm = () => {
+const SignInForm = () => {
   const dispatch = useDispatch();
 
   const initialValues = {
-    firstname: "",
-    lastname: "",
     mail: "",
     password: "",
   };
 
   const handleSubmit = (values) => {
-    dispatch(signUp(values));
+    dispatch(signIn(values));
   };
 
   return (
     <FormContainer
       initialValues={initialValues}
-      validationSchema={SignupSchema}
+      validationSchema={SigninSchema}
       onSubmit={handleSubmit}
     >
-      <h2>Inscription</h2>
-      <div>
-        <label htmlFor="firstname">Prénom</label>
-        <Field name="firstname" type="text" />
-        <ErrorMessage name="firstname" component="div" className="error" />
-      </div>
-
-      <div>
-        <label htmlFor="lastname">Nom</label>
-        <Field name="lastname" type="text" />
-        <ErrorMessage name="lastname" component="div" className="error" />
-      </div>
-
+      <h2>Connexion</h2>
       <div>
         <label htmlFor="mail">Email</label>
         <Field name="mail" type="email" />
@@ -65,4 +43,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default SignInForm;

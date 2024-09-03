@@ -7,6 +7,7 @@ import "./assets/css/global.css";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import UserSignUp from "./pages/UserSignUp";
+import UserSignIn from "./pages/UserSignIn";
 
 const route = createBrowserRouter([
   {
@@ -14,8 +15,12 @@ const route = createBrowserRouter([
     element: <Homepage />,
   },
   {
-    path: "/sign-up",
+    path: "/signup",
     element: <UserSignUp />,
+  },
+  {
+    path: "/signin",
+    element: <UserSignIn />,
   },
 ]);
 

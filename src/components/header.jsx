@@ -59,13 +59,13 @@ function Header() {
             <nav>
               <ul>
                 <li>
-                  <Link to="/sign-up">Inscription</Link>
+                  <Link to="/signup">Inscription</Link>
                 </li>
                 <li>
                   <p>/</p>
                 </li>
                 <li>
-                  <Link to="/sign-in">Connexion</Link>
+                  <Link to="/signin">Connexion</Link>
                 </li>
               </ul>
             </nav>
