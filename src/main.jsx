@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import UserSignUp from "./pages/UserSignUp";
 import UserSignIn from "./pages/UserSignIn";
+import Library from "./pages/Library";
 
 const route = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const route = createBrowserRouter([
   {
     path: "/signin",
     element: <UserSignIn />,
+  },
+  {
+    path: "/library",
+    element: <Library />,
   },
 ]);
 
