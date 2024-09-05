@@ -73,7 +73,6 @@ export const signUp = (userData) => {
 };
 
 export const signIn = (userData) => {
-  console.log("userData", userData);
   return async (dispatch) => {
     dispatch(signInRequest());
 
