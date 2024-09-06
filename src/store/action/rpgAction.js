@@ -19,19 +19,20 @@ const addRpgRequest = () => ({
 });
 
 export const addRpg = (userData) => {
-  console.log("userData", userData);
   return async (dispatch) => {
     dispatch(addRpgRequest());
 
+    const formData = new FormData();
+    formData.append("name", userData.name);
+    formData.append("description", userData.description);
+    formData.append("genreIds", JSON.stringify(userData.genreIds));
+    formData.append("file", userData.selectedFile);
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/rpgs/add-rpg`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData),
+          body: formData,
         }
       );
 

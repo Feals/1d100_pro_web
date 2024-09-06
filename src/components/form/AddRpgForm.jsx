@@ -24,17 +24,7 @@ const AddRpgForm = () => {
   };
 
   const handleSubmit = (values) => {
-    const formData = new FormData();
-    formData.append("name", values.name);
-    formData.append("description", values.description);
-    formData.append("genreIds", JSON.stringify(values.genreIds));
-    formData.append("selectedFile", values.selectedFile);
-    console.log("formData", formData);
-
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}:`, value);
-    }
-    dispatch(addRpg(formData));
+    dispatch(addRpg(values));
   };
 
   return (
