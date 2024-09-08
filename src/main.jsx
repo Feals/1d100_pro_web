@@ -9,6 +9,7 @@ import store from "./store/store";
 import UserSignUp from "./pages/UserSignUp";
 import UserSignIn from "./pages/UserSignIn";
 import Library from "./pages/Library";
+import RpgById from "./pages/RpgById";
 
 const route = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const route = createBrowserRouter([
   {
     path: "/library",
     element: <Library />,
+  },
+  {
+    path: "/rpg/:id",
+    element: <RpgById />,
   },
 ]);
 

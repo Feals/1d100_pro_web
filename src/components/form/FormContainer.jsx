@@ -6,12 +6,14 @@ const FormContainer = ({
   validationSchema,
   onSubmit,
   children,
+  enableReinitialize = false,
 }) => {
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+      enableReinitialize={enableReinitialize}
     >
       {({ isSubmitting }) => (
         <Form>
@@ -30,6 +32,7 @@ FormContainer.propTypes = {
   validationSchema: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
+  enableReinitialize: PropTypes.bool,
 };
 
 export default FormContainer;
