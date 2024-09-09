@@ -1,8 +1,5 @@
-import {
-  GET_ALL_GENRES_REQUEST,
-  GET_ALL_GENRES_SUCCESS,
-  GET_ALL_GENRES_FAILURE,
-} from "../action/actionTypes";
+import { GET_ALL_GENRES } from "../action/actionTypes";
+import asyncReducer from "./reducerUtils";
 
 const initialState = {
   genres: [],
@@ -10,16 +7,6 @@ const initialState = {
   error: null,
 };
 
-export default function genreReducer(state = initialState, action) {
-  switch (action.type) {
-    case GET_ALL_GENRES_REQUEST:
-      return { ...state, loading: true, error: null };
-    case GET_ALL_GENRES_SUCCESS:
-      return { ...state, loading: false, genres: action.data, error: null };
-    case GET_ALL_GENRES_FAILURE:
-      return { ...state, loading: false, error: action.error };
-
-    default:
-      return state;
-  }
+export default function rpgReducer(state = initialState, action) {
+  return asyncReducer(state, action, GET_ALL_GENRES) || state;
 }

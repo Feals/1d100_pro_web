@@ -1,21 +1,13 @@
-export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
-export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
-export const SIGNUP_FAILURE = "SIGNUP_FAILURE";
-export const SIGNIN_REQUEST = "SIGNIN_REQUEST";
-export const SIGNIN_SUCCESS = "SIGNIN_SUCCESS";
-export const SIGNIN_FAILURE = "SIGNIN_FAILURE";
-export const GET_ALL_GENRES_REQUEST = "GET_ALL_GENRES_REQUEST";
-export const GET_ALL_GENRES_SUCCESS = "GET_ALL_GENRES_SUCCESS";
-export const GET_ALL_GENRES_FAILURE = "GET_ALL_GENRES_FAILURE";
-export const ADD_RPG_SUCCESS = "ADD_RPG_SUCCESS";
-export const ADD_RPG_REQUEST = "ADD_RPG_REQUEST";
-export const ADD_RPG_FAILURE = "ADD_RPG_FAILURE";
-export const GET_ALL_RPGS_REQUEST = "GET_ALL_RPGS_REQUEST";
-export const GET_ALL_RPGS_SUCCESS = "GET_ALL_RPGS_SUCCESS";
-export const GET_ALL_RPGS_FAILURE = "GET_ALL_RPGS_FAILURE";
-export const UPDATE_RPG_SUCCESS = "UPDATE_RPG_SUCCESS";
-export const UPDATE_RPG_FAILURE = "UPDATE_RPG_FAILURE";
-export const UPDATE_RPG_REQUEST = "UPDATE_RPG_REQUEST";
-export const GET_RPG_BY_ID_SUCCESS = "GET_RPG_BY_ID_SUCCESS";
-export const GET_RPG_BY_ID_FAILURE = "GET_RPG_BY_ID_FAILURE";
-export const GET_RPG_BY_ID_REQUEST = "GET_RPG_BY_ID_REQUEST";
+const createActionTypes = (base) => ({
+  REQUEST: `${base}_REQUEST`,
+  SUCCESS: `${base}_SUCCESS`,
+  FAILURE: `${base}_FAILURE`,
+});
+
+export const SIGNUP = createActionTypes("SIGNUP");
+export const SIGNIN = createActionTypes("SIGNIN");
+export const GET_ALL_GENRES = createActionTypes("GET_ALL_GENRES");
+export const ADD_RPG = createActionTypes("ADD_RPG");
+export const GET_ALL_RPGS = createActionTypes("GET_ALL_RPGS");
+export const UPDATE_RPG = createActionTypes("UPDATE_RPG");
+export const GET_RPG_BY_ID = createActionTypes("GET_RPG_BY_ID");

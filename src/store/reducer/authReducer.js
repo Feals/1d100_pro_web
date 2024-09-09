@@ -1,31 +1,12 @@
-import {
-  SIGNIN_REQUEST,
-  SIGNIN_SUCCESS,
-  SIGNIN_FAILURE,
-} from "../action/actionTypes";
+import { SIGNUP, SIGNIN } from "../action/actionTypes";
+import asyncReducer from "./reducerUtils";
 
-const initialState = {
-  token: null,
-};
+const initialState = { token: null, loading: false, error: null };
 
 export default function authReducer(state = initialState, action) {
-  switch (action.type) {
-    case "CREATE_SESSION":
-    case "UPDATE_SESSION":
-      return { ...state, token: action.token };
-    case "LOGOUT":
-      return {
-        ...state,
-        token: null,
-      };
-    case SIGNIN_REQUEST:
-      return { ...state, loading: true, error: null };
-    case SIGNIN_SUCCESS:
-      return { ...state, loading: false, token: action.token, error: null };
-    case SIGNIN_FAILURE:
-      return { ...state, loading: false, error: action.error };
-
-    default:
-      return state;
-  }
+  return (
+    asyncReducer(state, action, SIGNUP) ||
+    asyncReducer(state, action, SIGNIN) ||
+    state
+  );
 }

@@ -1,26 +1,8 @@
-import {
-  GET_ALL_GENRES_REQUEST,
-  GET_ALL_GENRES_SUCCESS,
-  GET_ALL_GENRES_FAILURE,
-} from "./actionTypes";
-
-const getAllGenresSuccess = (data) => ({
-  type: GET_ALL_GENRES_SUCCESS,
-  data,
-});
-
-const getAllGenresFailures = (data) => ({
-  type: GET_ALL_GENRES_FAILURE,
-  data,
-});
-
-const getAllGenresRequest = () => ({
-  type: GET_ALL_GENRES_REQUEST,
-});
+import { getAllGenresActions } from "./actionCreator";
 
 export const getAllGenres = () => {
   return async (dispatch) => {
-    dispatch(getAllGenresRequest());
+    dispatch(getAllGenresActions.request());
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/genres`, {
@@ -28,7 +10,6 @@ export const getAllGenres = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(),
       });
 
       if (!response.ok) {
@@ -36,9 +17,9 @@ export const getAllGenres = () => {
       }
 
       const genres = await response.json();
-      dispatch(getAllGenresSuccess(genres));
+      dispatch(getAllGenresActions.success(genres));
     } catch (error) {
-      dispatch(getAllGenresFailures(error.message));
+      dispatch(getAllGenresActions.failure(error.message));
     }
   };
 };

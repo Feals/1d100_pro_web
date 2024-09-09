@@ -1,83 +1,43 @@
 import {
-  ADD_RPG_SUCCESS,
-  ADD_RPG_REQUEST,
-  ADD_RPG_FAILURE,
-  GET_ALL_RPGS_REQUEST,
-  GET_ALL_RPGS_SUCCESS,
-  GET_ALL_RPGS_FAILURE,
-  UPDATE_RPG_SUCCESS,
-  UPDATE_RPG_FAILURE,
-  UPDATE_RPG_REQUEST,
-  GET_RPG_BY_ID_SUCCESS,
-  GET_RPG_BY_ID_FAILURE,
-  GET_RPG_BY_ID_REQUEST,
-} from "./actionTypes";
+  getAllGenresActions,
+  addRpgActions,
+  getAllRpgsActions,
+  updateRpgActions,
+  getRpgByIdActions,
+} from "./actionCreator";
 
-const addRpgSuccess = (data) => ({
-  type: ADD_RPG_SUCCESS,
-  data,
-});
+export const getAllGenres = () => {
+  return async (dispatch) => {
+    dispatch(getAllGenresActions.request());
 
-const addRpgFailures = (data) => ({
-  type: ADD_RPG_FAILURE,
-  data,
-});
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/genres`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
 
-const addRpgRequest = () => ({
-  type: ADD_RPG_REQUEST,
-});
+      if (!response.ok) {
+        throw new Error("Erreur lors de la récupération des genres");
+      }
 
-const updateRpgSuccess = (data) => ({
-  type: UPDATE_RPG_SUCCESS,
-  data,
-});
-
-const updateRpgFailures = (data) => ({
-  type: UPDATE_RPG_FAILURE,
-  data,
-});
-
-const updateRpgRequest = () => ({
-  type: UPDATE_RPG_REQUEST,
-});
-
-const getAllRpgsSuccess = (data) => ({
-  type: GET_ALL_RPGS_SUCCESS,
-  data,
-});
-
-const getAllRpgsFailures = (data) => ({
-  type: GET_ALL_RPGS_FAILURE,
-  data,
-});
-
-const getAllRpgsRequest = () => ({
-  type: GET_ALL_RPGS_REQUEST,
-});
-
-const getRpgByIdSuccess = (data) => ({
-  type: GET_RPG_BY_ID_SUCCESS,
-  data,
-});
-
-const getRpgByIdFailure = (error) => ({
-  type: GET_RPG_BY_ID_FAILURE,
-  error,
-});
-
-const getRpgByIdRequest = () => ({
-  type: GET_RPG_BY_ID_REQUEST,
-});
+      const genres = await response.json();
+      dispatch(getAllGenresActions.success(genres));
+    } catch (error) {
+      dispatch(getAllGenresActions.failure(error.message));
+    }
+  };
+};
 
 export const addRpg = (userData) => {
   return async (dispatch) => {
-    dispatch(addRpgRequest());
+    dispatch(addRpgActions.request());
 
     const formData = new FormData();
     formData.append("name", userData.name);
     formData.append("description", userData.description);
     formData.append("genreIds", JSON.stringify(userData.genreIds));
     formData.append("file", userData.selectedFile);
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/rpgs/add-rpg`,
@@ -88,30 +48,52 @@ export const addRpg = (userData) => {
       );
 
       if (!response.ok) {
-        throw new Error("Erreur lors de la création d'un jdr");
+        throw new Error("Erreur lors de la création d'un JDR");
       }
 
       const data = await response.json();
-      dispatch(addRpgSuccess(data));
+      dispatch(addRpgActions.success(data));
     } catch (error) {
-      dispatch(addRpgFailures(error.message));
+      dispatch(addRpgActions.failure(error.message));
+    }
+  };
+};
+
+export const getAllRpgs = () => {
+  return async (dispatch) => {
+    dispatch(getAllRpgsActions.request());
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/rpgs`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de la récupération des JDRs");
+      }
+
+      const rpgs = await response.json();
+      dispatch(getAllRpgsActions.success(rpgs));
+    } catch (error) {
+      dispatch(getAllRpgsActions.failure(error.message));
     }
   };
 };
 
 export const updateRpg = (userData) => {
   return async (dispatch) => {
-    dispatch(updateRpgRequest());
-    const id = userData.id;
-    console.log("userData", userData);
+    dispatch(updateRpgActions.request());
+
     const formData = new FormData();
     formData.append("name", userData.values.name);
     formData.append("description", userData.values.description);
     formData.append("genreIds", JSON.stringify(userData.values.genreIds));
     formData.append("file", userData.values.selectedFile);
+
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/rpgs/${id}`,
+        `${import.meta.env.VITE_API_URL}/rpgs/${userData.id}`,
         {
           method: "PUT",
           body: formData,
@@ -119,53 +101,27 @@ export const updateRpg = (userData) => {
       );
 
       if (!response.ok) {
-        throw new Error("Erreur lors de l'update d'un jdr");
+        throw new Error("Erreur lors de la mise à jour d'un JDR");
       }
 
       const data = await response.json();
-      dispatch(updateRpgSuccess(data));
+      dispatch(updateRpgActions.success(data));
     } catch (error) {
-      dispatch(updateRpgFailures(error.message));
-    }
-  };
-};
-
-export const getAllRpgs = () => {
-  return async (dispatch) => {
-    dispatch(getAllRpgsRequest());
-
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/rpgs`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Erreur lors de la récupération des jdrs");
-      }
-
-      const rpgs = await response.json();
-      dispatch(getAllRpgsSuccess(rpgs));
-    } catch (error) {
-      dispatch(getAllRpgsFailures(error.message));
+      dispatch(updateRpgActions.failure(error.message));
     }
   };
 };
 
 export const getRpgById = (id) => {
   return async (dispatch) => {
-    dispatch(getRpgByIdRequest());
+    dispatch(getRpgByIdActions.request());
 
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/rpgs/${id}`,
         {
           method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       );
 
@@ -174,9 +130,9 @@ export const getRpgById = (id) => {
       }
 
       const rpg = await response.json();
-      dispatch(getRpgByIdSuccess(rpg));
+      dispatch(getRpgByIdActions.success(rpg));
     } catch (error) {
-      dispatch(getRpgByIdFailure(error.message));
+      dispatch(getRpgByIdActions.failure(error.message));
     }
   };
 };
