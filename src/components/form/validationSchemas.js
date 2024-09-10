@@ -18,7 +18,7 @@ export const SigninSchema = Yup.object().shape({
   password: Yup.string().min(6, "Mot de passe trop court").required("Requis"),
 });
 
-export const addJdrSchema = Yup.object().shape({
+export const addRpgSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, "Le nom est trop court!")
     .max(100, "Le nom est trop long!")
@@ -31,4 +31,22 @@ export const addJdrSchema = Yup.object().shape({
     .min(1, "Sélectionnez au moins un genre")
     .required("Requis"),
   selectedFile: Yup.mixed().required("Une image est requise"),
+});
+
+export const addTableSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, "Le nom est trop court!")
+    .max(100, "Le nom est trop long!")
+    .required("Le nom est requis"),
+  description: Yup.string()
+    .min(10, "La description est trop courte!")
+    .max(1000, "La description est trop longue!")
+    .required("La description est requise"),
+  nbPlayer: Yup.number()
+    .integer("Le nombre de joueurs doit être un entier!")
+    .min(1, "Minimum 1 Joueur!")
+    .required("Requis"),
+  RpgId: Yup.number()
+    .integer("L'ID du RPG doit être un entier!")
+    .required("Requis"),
 });

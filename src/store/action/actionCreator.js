@@ -6,6 +6,10 @@ import {
   GET_ALL_RPGS,
   UPDATE_RPG,
   GET_RPG_BY_ID,
+  ADD_TABLE,
+  GET_ALL_TABLES,
+  UPDATE_TABLE,
+  GET_TABLE_BY_ID,
 } from "./actionTypes";
 
 const createAsyncAction = (types) => ({
@@ -21,3 +25,7 @@ export const addRpgActions = createAsyncAction(ADD_RPG);
 export const getAllRpgsActions = createAsyncAction(GET_ALL_RPGS);
 export const updateRpgActions = createAsyncAction(UPDATE_RPG);
 export const getRpgByIdActions = createAsyncAction(GET_RPG_BY_ID);
+export const addTableActions = createAsyncAction(ADD_TABLE);
+export const getAllTablesActions = createAsyncAction(GET_ALL_TABLES);
+export const updateTableActions = createAsyncAction(UPDATE_TABLE);
+export const getTableByIdActions = createAsyncAction(GET_TABLE_BY_ID);

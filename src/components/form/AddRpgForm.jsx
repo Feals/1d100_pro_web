@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addRpg, updateRpg, getRpgById } from "../../store/action/rpgAction";
-import { addJdrSchema } from "./validationSchemas";
+import { addRpgSchema } from "./validationSchemas";
 import FormContainer from "./FormContainer";
 import FormField from "./FormField";
 import { Field, ErrorMessage, FieldArray } from "formik";
@@ -59,7 +59,7 @@ const AddRpgForm = () => {
       ) : (
         <FormContainer
           initialValues={initialValues}
-          validationSchema={addJdrSchema}
+          validationSchema={addRpgSchema}
           onSubmit={handleSubmit}
           enableReinitialize={true}
         >

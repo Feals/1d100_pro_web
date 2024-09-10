@@ -11,6 +11,8 @@ import UserSignUp from "./pages/UserSignUp";
 import UserSignIn from "./pages/UserSignIn";
 import Library from "./pages/Library";
 import RpgById from "./pages/RpgById";
+import Tables from "./pages/Tables";
+import TableById from "./pages/TableById";
 
 const route = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const route = createBrowserRouter([
   {
     path: "/rpg/:id",
     element: <RpgById />,
+  },
+  {
+    path: "/tables",
+    element: <Tables />,
+  },
+  {
+    path: "/table/:id",
+    element: <TableById />,
   },
 ]);
 

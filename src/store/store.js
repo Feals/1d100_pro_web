@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "./reducer/authReducer";
 import genreReducer from "./reducer/genreReducer";
 import rpgReducer from "./reducer/rpgReducer";
+import tableReducer from "./reducer/tableReducer";
 
 const persistConfig = {
   key: "root",
@@ -17,6 +18,7 @@ const store = configureStore({
     auth: persistedReducer,
     genres: genreReducer,
     rpgs: rpgReducer,
+    tables: tableReducer,
   },
 });
 
