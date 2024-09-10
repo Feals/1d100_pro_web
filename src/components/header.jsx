@@ -7,11 +7,13 @@ import { jwtDecode } from "jwt-decode";
 function Header() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
   const handleLogout = () => {
     dispatch(logout());
   };
 
   console.log("token", token);
+  console.log("user", user);
   if (token) {
     const decodedToken = jwtDecode(token);
     console.log("token décodé", decodedToken);

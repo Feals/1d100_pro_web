@@ -7,6 +7,13 @@ const initialState = {
   error: null,
 };
 
-export default function rpgReducer(state = initialState, action) {
-  return asyncReducer(state, action, GET_ALL_GENRES) || state;
+export default function genreReducer(state = initialState, action) {
+  const asyncActionHandlers = [{ types: GET_ALL_GENRES, key: "genres" }];
+
+  for (const { types, key } of asyncActionHandlers) {
+    const newState = asyncReducer(state, action, types, key);
+    if (newState !== state) return newState;
+  }
+
+  return state;
 }

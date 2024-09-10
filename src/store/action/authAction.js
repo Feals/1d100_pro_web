@@ -45,6 +45,7 @@ export const signIn = (userData) => {
       }
 
       const data = await response.json();
+      console.log("data", data);
       dispatch(signInActions.success(data.token));
     } catch (error) {
       dispatch(signInActions.failure(error.message));

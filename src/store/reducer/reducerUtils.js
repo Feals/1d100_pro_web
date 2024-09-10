@@ -1,13 +1,15 @@
-const asyncReducer = (state, action, baseState) => {
+const asyncReducer = (state, action, actionTypes, key) => {
+  const { REQUEST, SUCCESS, FAILURE } = actionTypes;
+
   switch (action.type) {
-    case baseState.REQUEST:
+    case REQUEST:
       return { ...state, loading: true, error: null };
-    case baseState.SUCCESS:
-      return { ...state, loading: false, data: action.data, error: null };
-    case baseState.FAILURE:
+    case SUCCESS:
+      return { ...state, loading: false, [key]: action.data, error: null };
+    case FAILURE:
       return { ...state, loading: false, error: action.error };
     default:
-      return null;
+      return state;
   }
 };
 

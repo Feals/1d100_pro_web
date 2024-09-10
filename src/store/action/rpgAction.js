@@ -1,32 +1,9 @@
 import {
-  getAllGenresActions,
   addRpgActions,
   getAllRpgsActions,
   updateRpgActions,
   getRpgByIdActions,
 } from "./actionCreator";
-
-export const getAllGenres = () => {
-  return async (dispatch) => {
-    dispatch(getAllGenresActions.request());
-
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/genres`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (!response.ok) {
-        throw new Error("Erreur lors de la récupération des genres");
-      }
-
-      const genres = await response.json();
-      dispatch(getAllGenresActions.success(genres));
-    } catch (error) {
-      dispatch(getAllGenresActions.failure(error.message));
-    }
-  };
-};
 
 export const addRpg = (userData) => {
   return async (dispatch) => {
@@ -75,6 +52,7 @@ export const getAllRpgs = () => {
 
       const rpgs = await response.json();
       dispatch(getAllRpgsActions.success(rpgs));
+      console.log("erer", rpgs);
     } catch (error) {
       dispatch(getAllRpgsActions.failure(error.message));
     }
