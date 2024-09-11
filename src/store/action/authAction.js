@@ -1,4 +1,5 @@
 import { signUpActions, signInActions } from "./actionCreator";
+import { jwtDecode } from "jwt-decode";
 
 export const signUp = (userData) => {
   return async (dispatch) => {
@@ -45,8 +46,8 @@ export const signIn = (userData) => {
       }
 
       const data = await response.json();
-      console.log("data", data);
-      dispatch(signInActions.success(data.token));
+      const decodedToken = jwtDecode(data.token);
+      dispatch(signInActions.success(decodedToken));
     } catch (error) {
       dispatch(signInActions.failure(error.message));
     }

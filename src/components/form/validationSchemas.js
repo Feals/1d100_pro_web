@@ -46,7 +46,10 @@ export const addTableSchema = Yup.object().shape({
     .integer("Le nombre de joueurs doit être un entier!")
     .min(1, "Minimum 1 Joueur!")
     .required("Requis"),
-  RpgId: Yup.number()
+  rpgId: Yup.number()
     .integer("L'ID du RPG doit être un entier!")
+    .required("Requis"),
+  sessionDate: Yup.date()
+    .min(new Date(), "La date doit être dans le futur!")
     .required("Requis"),
 });

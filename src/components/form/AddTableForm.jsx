@@ -11,6 +11,7 @@ import { Field, ErrorMessage } from "formik";
 import { getAllRpgs } from "../../store/action/rpgAction";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import DatePickerField from "../DatePickerField";
 
 const AddTableForm = () => {
   const dispatch = useDispatch();
@@ -20,15 +21,28 @@ const AddTableForm = () => {
     loading: loadingRpgs,
     error: errorRpgs,
   } = useSelector((state) => state.rpgs);
-
   const { table, loading: loadingTable } = useSelector((state) => state.tables);
+
+  const token = useSelector((state) => state.auth.token);
+  const userId = token ? token.userId : null;
 
   const [initialValues, setInitialValues] = useState({
     name: "",
     description: "",
     nbPlayer: null,
-    rpgId: "",
+    rpgId: null,
+    sessionDate: null,
+    author: userId,
   });
+
+  console.log("dfdsdsf", token);
+
+  useEffect(() => {
+    dispatch(getAllRpgs());
+    if (id) {
+      dispatch(getTableById(id));
+    }
+  }, [dispatch, id]);
 
   useEffect(() => {
     dispatch(getAllRpgs());
@@ -42,17 +56,25 @@ const AddTableForm = () => {
       setInitialValues({
         name: table.name || "",
         description: table.description || "",
-        nbPlayer: table.nbPlayer,
-        rpgId: table.RpgId || "", // Ensure it is an empty string if no RpgId
+        nbPlayer: table.nbPlayer || "",
+        rpgId: table.rpgId || null,
+        sessionDate: table.sessionDate ? new Date(table.sessionDate) : null,
+        author: userId,
       });
     }
-  }, [table, id]);
+  }, [table, id, userId]);
 
   const handleSubmit = (values) => {
+    const tableData = {
+      ...values,
+      rpgId: parseInt(values.rpgId, 10),
+      author: userId,
+    };
+
     if (id) {
-      dispatch(updateTable({ id, values }));
+      dispatch(updateTable({ id, values: tableData }));
     } else {
-      dispatch(addTable(values));
+      dispatch(addTable(tableData));
     }
   };
 
@@ -71,13 +93,14 @@ const AddTableForm = () => {
           <FormField label="Nom" name="name" type="text" />
           <FormField label="Description" name="description" type="text" />
           <FormField label="Nombre de joueurs" name="nbPlayer" type="number" />
+
           {loadingRpgs ? (
             <p>Chargement des JDRs...</p>
           ) : errorRpgs ? (
             <p>Erreur: {errorRpgs}</p>
           ) : (
             <div>
-              <label htmlFor="RpgId">Sélectionner un JDR</label>
+              <label htmlFor="rpgId">Sélectionner un JDR</label>
               <Field as="select" name="rpgId">
                 <option value="" label="Sélectionner un JDR" disabled />
                 {rpgs.map((rpg) => (
@@ -89,6 +112,13 @@ const AddTableForm = () => {
               <ErrorMessage name="rpgId" component="div" className="error" />
             </div>
           )}
+
+          <DatePickerField
+            label="Date de session"
+            name="sessionDate"
+            minDate={new Date()}
+            filterDate={(date) => date.getDay() === 6}
+          />
         </FormContainer>
       )}
     </div>

@@ -1,7 +1,14 @@
 import { SIGNUP, SIGNIN } from "../action/actionTypes";
-import asyncReducer from "./reducerUtils"; // Assure-toi d'importer correctement ton asyncReducer
-
-const initialState = { token: null, user: null, loading: false, error: null };
+import asyncReducer from "./reducerUtils";
+const initialState = {
+  userId: "",
+  lastname: "",
+  firstname: "",
+  mail: "",
+  iat: "",
+  loading: false,
+  error: null,
+};
 
 export default function authReducer(state = initialState, action) {
   const asyncActionHandlers = [

@@ -6,18 +6,20 @@ import {
 } from "./actionCreator";
 
 export const addTable = (userData) => {
+  console.log("userData", userData);
   return async (dispatch) => {
     dispatch(addTableActions.request());
 
     const formData = new FormData();
     formData.append("name", userData.name);
     formData.append("description", userData.description);
-    formData.append("genreIds", JSON.stringify(userData.genreIds));
-    formData.append("file", userData.selectedFile);
+    formData.append("nbPlayers", userData.nbPlayers);
+    formData.append("rpgId", userData.rpgId);
+    formData.append("sessionId", userData.sessionId);
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/tables/add-table`,
+        `${import.meta.env.VITE_API_URL}/rpgTables/add-table`,
         {
           method: "POST",
           body: formData,
