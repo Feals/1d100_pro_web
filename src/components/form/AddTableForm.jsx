@@ -29,14 +29,12 @@ const AddTableForm = () => {
   const [initialValues, setInitialValues] = useState({
     name: "",
     description: "",
-    nbPlayer: null,
+    nbPlayers: null,
     rpgId: null,
     sessionDate: null,
     author: userId,
   });
 
-  console.log("dfdsdsf", token);
-
   useEffect(() => {
     dispatch(getAllRpgs());
     if (id) {
@@ -45,18 +43,12 @@ const AddTableForm = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    dispatch(getAllRpgs());
-    if (id) {
-      dispatch(getTableById(id));
-    }
-  }, [dispatch, id]);
-
-  useEffect(() => {
+    console.log("table", table);
     if (table && id) {
       setInitialValues({
         name: table.name || "",
         description: table.description || "",
-        nbPlayer: table.nbPlayer || "",
+        nbPlayers: table.nbPlayers || "",
         rpgId: table.rpgId || null,
         sessionDate: table.sessionDate ? new Date(table.sessionDate) : null,
         author: userId,
@@ -92,7 +84,7 @@ const AddTableForm = () => {
           <h2>{id ? "Modifier une Table" : "Ajouter une Table"}</h2>
           <FormField label="Nom" name="name" type="text" />
           <FormField label="Description" name="description" type="text" />
-          <FormField label="Nombre de joueurs" name="nbPlayer" type="number" />
+          <FormField label="Nombre de joueurs" name="nbPlayers" type="number" />
 
           {loadingRpgs ? (
             <p>Chargement des JDRs...</p>

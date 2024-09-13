@@ -9,20 +9,13 @@ export const addTable = (userData) => {
   console.log("userData", userData);
   return async (dispatch) => {
     dispatch(addTableActions.request());
-
-    const formData = new FormData();
-    formData.append("name", userData.name);
-    formData.append("description", userData.description);
-    formData.append("nbPlayers", userData.nbPlayers);
-    formData.append("rpgId", userData.rpgId);
-    formData.append("sessionId", userData.sessionId);
-
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/rpgTables/add-table`,
         {
           method: "POST",
-          body: formData,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
         }
       );
 
@@ -43,10 +36,13 @@ export const getAllTables = () => {
     dispatch(getAllTablesActions.request());
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/rpgs`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/rpgTables`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Erreur lors de la récupération des tables de JDR");
@@ -61,21 +57,16 @@ export const getAllTables = () => {
 };
 
 export const updateTable = (userData) => {
+  console.log("userData", userData);
   return async (dispatch) => {
     dispatch(updateTableActions.request());
-
-    const formData = new FormData();
-    formData.append("name", userData.values.name);
-    formData.append("description", userData.values.description);
-    formData.append("genreIds", JSON.stringify(userData.values.genreIds));
-    formData.append("file", userData.values.selectedFile);
-
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/tables/${userData.id}`,
+        `${import.meta.env.VITE_API_URL}/rpgTables/${userData.id}`,
         {
           method: "PUT",
-          body: formData,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
         }
       );
 
@@ -92,12 +83,13 @@ export const updateTable = (userData) => {
 };
 
 export const getTableById = (id) => {
+  console.log("test");
   return async (dispatch) => {
     dispatch(getTableByIdActions.request());
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/tables/${id}`,
+        `${import.meta.env.VITE_API_URL}/rpgTables/${id}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -109,6 +101,7 @@ export const getTableById = (id) => {
       }
 
       const table = await response.json();
+      console.log("ezezer", table);
       dispatch(getTableByIdActions.success(table));
     } catch (error) {
       dispatch(getTableByIdActions.failure(error.message));

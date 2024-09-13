@@ -11,7 +11,7 @@ const initialState = { rpgs: [], rpg: null, loading: false, error: null };
 export default function rpgReducer(state = initialState, action) {
   const asyncActionHandlers = [
     { types: ADD_TABLE, key: "tables" },
-    { types: GET_ALL_TABLES, key: "table" },
+    { types: GET_ALL_TABLES, key: "tables" },
     { types: UPDATE_TABLE, key: "table" },
     { types: GET_TABLE_BY_ID, key: "table" },
   ];

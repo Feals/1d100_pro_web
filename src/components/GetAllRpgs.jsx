@@ -13,7 +13,7 @@ const GetAllRpgs = () => {
   console.log("rpgs", rpgs);
   return (
     <div>
-      <h2>JDRs :</h2>
+      <h2>Les JDRs :</h2>
       {loading ? (
         <p>Chargement des JDRs...</p>
       ) : error ? (

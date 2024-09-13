@@ -52,7 +52,6 @@ export const getAllRpgs = () => {
 
       const rpgs = await response.json();
       dispatch(getAllRpgsActions.success(rpgs));
-      console.log("erer", rpgs);
     } catch (error) {
       dispatch(getAllRpgsActions.failure(error.message));
     }

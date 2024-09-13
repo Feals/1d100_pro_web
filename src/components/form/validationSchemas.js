@@ -42,7 +42,7 @@ export const addTableSchema = Yup.object().shape({
     .min(10, "La description est trop courte!")
     .max(1000, "La description est trop longue!")
     .required("La description est requise"),
-  nbPlayer: Yup.number()
+  nbPlayers: Yup.number()
     .integer("Le nombre de joueurs doit être un entier!")
     .min(1, "Minimum 1 Joueur!")
     .required("Requis"),
