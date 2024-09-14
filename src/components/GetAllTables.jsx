@@ -1,16 +1,47 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { getAllTables } from "../store/action/tableAction";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllTables,
+  addUserToTable,
+  removedUserToTable,
+} from "../store/action/tableAction";
+import SubscribeButton from "./bouton/subscribeButton";
+import UnsubscribeButton from "./bouton/unsubscribeButton";
 
 const GetAllTables = () => {
   const dispatch = useDispatch();
   const { tables, loading, error } = useSelector((state) => state.tables);
 
+  const [registrationStatus, setRegistrationStatus] = useState({});
+
   useEffect(() => {
     dispatch(getAllTables());
   }, [dispatch]);
-  console.log("tables", tables);
+
+  const handleSubscribe = async (tableId) => {
+    try {
+      await dispatch(addUserToTable(tableId));
+      setRegistrationStatus((prevState) => ({
+        ...prevState,
+        [tableId]: true,
+      }));
+    } catch (error) {
+      console.error("Erreur lors de l'inscription :", error);
+    }
+  };
+
+  const handleUnsubscribe = async (tableId) => {
+    try {
+      await dispatch(removedUserToTable(tableId));
+      setRegistrationStatus((prevState) => ({
+        ...prevState,
+        [tableId]: false,
+      }));
+    } catch (error) {
+      console.error("Erreur lors de la désinscription :", error);
+    }
+  };
 
   return (
     <div>
@@ -22,6 +53,11 @@ const GetAllTables = () => {
       ) : tables && tables.length > 0 ? (
         tables.map((table) => (
           <div key={table.id}>
+            {registrationStatus[table.id] ? (
+              <UnsubscribeButton onLeave={() => handleUnsubscribe(table.id)} />
+            ) : (
+              <SubscribeButton onJoin={() => handleSubscribe(table.id)} />
+            )}
             <p>nom: {table.name}</p>
             <p>description: {table.description}</p>
             <p>genres :</p>
@@ -32,10 +68,11 @@ const GetAllTables = () => {
                   </div>
                 ))
               : null}
-            <p>nombres de joueurs Maximum : </p>
-            {table.nb_players}
-            <p>nombres d&apos;inscrit :</p>
-            {table.registered.length} / {table.nb_players}
+            <p>nombres de joueurs Maximum : {table.nb_players}</p>
+            <p>
+              nombres d&apos;inscrit : {table.registered.length} /{" "}
+              {table.nb_players}
+            </p>
             <p>inscrit :</p>
             {table.registeredUsers.length > 0
               ? table.registeredUsers.map((registeredUser) => (

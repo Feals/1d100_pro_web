@@ -10,7 +10,7 @@ const GetAllRpgs = () => {
   useEffect(() => {
     dispatch(getAllRpgs());
   }, [dispatch]);
-  console.log("rpgs", rpgs);
+
   return (
     <div>
       <h2>Les JDRs :</h2>

@@ -15,3 +15,5 @@ export const ADD_TABLE = createActionTypes("ADD_TABLE");
 export const GET_ALL_TABLES = createActionTypes("GET_ALL_TABLESS");
 export const UPDATE_TABLE = createActionTypes("UPDATE_TABLE");
 export const GET_TABLE_BY_ID = createActionTypes("GET_TABLE_BY_ID");
+export const ADD_USER_TO_TABLE = createActionTypes("ADD_USER_TO_TABLE");
+export const REMOVED_USER_TO_TABLE = createActionTypes("REMOVED_USER_TO_TABLE");

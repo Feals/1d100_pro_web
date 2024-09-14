@@ -6,6 +6,7 @@ import { logout } from "../store/action/authAction";
 function Header() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  console.log("token", token);
   const handleLogout = () => {
     dispatch(logout());
   };

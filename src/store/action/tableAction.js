@@ -3,10 +3,11 @@ import {
   getAllTablesActions,
   updateTableActions,
   getTableByIdActions,
+  addUserToTableActions,
+  removedUserToTableActions,
 } from "./actionCreator";
 
 export const addTable = (userData) => {
-  console.log("userData", userData);
   return async (dispatch) => {
     dispatch(addTableActions.request());
     try {
@@ -57,7 +58,6 @@ export const getAllTables = () => {
 };
 
 export const updateTable = (userData) => {
-  console.log("userData", userData);
   return async (dispatch) => {
     dispatch(updateTableActions.request());
     try {
@@ -78,6 +78,58 @@ export const updateTable = (userData) => {
       dispatch(updateTableActions.success(data));
     } catch (error) {
       dispatch(updateTableActions.failure(error.message));
+    }
+  };
+};
+
+export const addUserToTable = (userData) => {
+  console.log("userData", userData);
+  return async (dispatch) => {
+    dispatch(addUserToTableActions.request());
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/rpgTables/subscrite/${userData.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de la mise à jour d'une table de JDR");
+      }
+
+      const data = await response.json();
+      dispatch(addUserToTableActions.success(data));
+    } catch (error) {
+      dispatch(addUserToTableActions.failure(error.message));
+    }
+  };
+};
+
+export const removedUserToTable = (userData) => {
+  console.log("userData", userData);
+  return async (dispatch) => {
+    dispatch(removedUserToTableActions.request());
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/rpgTables/unsubscribe/${userData.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de la mise à jour d'une table de JDR");
+      }
+
+      const data = await response.json();
+      dispatch(removedUserToTableActions.success(data));
+    } catch (error) {
+      dispatch(removedUserToTableActions.failure(error.message));
     }
   };
 };

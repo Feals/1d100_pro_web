@@ -10,6 +10,8 @@ import {
   GET_ALL_TABLES,
   UPDATE_TABLE,
   GET_TABLE_BY_ID,
+  ADD_USER_TO_TABLE,
+  REMOVED_USER_TO_TABLE,
 } from "./actionTypes";
 
 const createAsyncAction = (types) => ({
@@ -29,3 +31,7 @@ export const addTableActions = createAsyncAction(ADD_TABLE);
 export const getAllTablesActions = createAsyncAction(GET_ALL_TABLES);
 export const updateTableActions = createAsyncAction(UPDATE_TABLE);
 export const getTableByIdActions = createAsyncAction(GET_TABLE_BY_ID);
+export const addUserToTableActions = createAsyncAction(ADD_USER_TO_TABLE);
+export const removedUserToTableActions = createAsyncAction(
+  REMOVED_USER_TO_TABLE
+);
