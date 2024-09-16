@@ -12,6 +12,7 @@ import {
   GET_TABLE_BY_ID,
   ADD_USER_TO_TABLE,
   REMOVED_USER_TO_TABLE,
+  GET_DATES_WHERE_USER_REGISTERED,
 } from "./actionTypes";
 
 const createAsyncAction = (types) => ({
@@ -34,4 +35,7 @@ export const getTableByIdActions = createAsyncAction(GET_TABLE_BY_ID);
 export const addUserToTableActions = createAsyncAction(ADD_USER_TO_TABLE);
 export const removedUserToTableActions = createAsyncAction(
   REMOVED_USER_TO_TABLE
+);
+export const getDatesWhereUserRegisteredActions = createAsyncAction(
+  GET_DATES_WHERE_USER_REGISTERED
 );

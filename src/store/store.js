@@ -5,6 +5,7 @@ import authReducer from "./reducer/authReducer";
 import genreReducer from "./reducer/genreReducer";
 import rpgReducer from "./reducer/rpgReducer";
 import tableReducer from "./reducer/tableReducer";
+import userRegistrationsReducer from "./reducer/userRegistrationsReducer";
 
 const persistConfig = {
   key: "root",
@@ -19,6 +20,7 @@ const store = configureStore({
     genres: genreReducer,
     rpgs: rpgReducer,
     tables: tableReducer,
+    userRegistrations: userRegistrationsReducer,
   },
 });
 

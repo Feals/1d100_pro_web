@@ -3,8 +3,6 @@ import {
   getAllTablesActions,
   updateTableActions,
   getTableByIdActions,
-  addUserToTableActions,
-  removedUserToTableActions,
 } from "./actionCreator";
 
 export const addTable = (userData) => {
@@ -82,60 +80,7 @@ export const updateTable = (userData) => {
   };
 };
 
-export const addUserToTable = (userData) => {
-  console.log("userData", userData);
-  return async (dispatch) => {
-    dispatch(addUserToTableActions.request());
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/rpgTables/subscrite/${userData.id}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userData),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Erreur lors de la mise à jour d'une table de JDR");
-      }
-
-      const data = await response.json();
-      dispatch(addUserToTableActions.success(data));
-    } catch (error) {
-      dispatch(addUserToTableActions.failure(error.message));
-    }
-  };
-};
-
-export const removedUserToTable = (userData) => {
-  console.log("userData", userData);
-  return async (dispatch) => {
-    dispatch(removedUserToTableActions.request());
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/rpgTables/unsubscribe/${userData.id}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userData),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Erreur lors de la mise à jour d'une table de JDR");
-      }
-
-      const data = await response.json();
-      dispatch(removedUserToTableActions.success(data));
-    } catch (error) {
-      dispatch(removedUserToTableActions.failure(error.message));
-    }
-  };
-};
-
 export const getTableById = (id) => {
-  console.log("test");
   return async (dispatch) => {
     dispatch(getTableByIdActions.request());
 
@@ -153,7 +98,6 @@ export const getTableById = (id) => {
       }
 
       const table = await response.json();
-      console.log("ezezer", table);
       dispatch(getTableByIdActions.success(table));
     } catch (error) {
       dispatch(getTableByIdActions.failure(error.message));

@@ -1,43 +1,42 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllTables,
-  addUserToTable,
-  removedUserToTable,
-} from "../store/action/tableAction";
+import { getAllTables } from "../store/action/tableAction";
+import { getDatesWhereUserRegistered } from "../store/action/userRegistrationsAction";
 import SubscribeButton from "./bouton/subscribeButton";
 import UnsubscribeButton from "./bouton/unsubscribeButton";
+import {
+  addUserToTable,
+  removedUserToTable,
+} from "../store/action/userRegistrationsAction";
 
 const GetAllTables = () => {
   const dispatch = useDispatch();
   const { tables, loading, error } = useSelector((state) => state.tables);
-
-  const [registrationStatus, setRegistrationStatus] = useState({});
+  const { token } = useSelector((state) => state.auth);
+  const { userRegistrations } = useSelector((state) => state.userRegistrations);
 
   useEffect(() => {
     dispatch(getAllTables());
   }, [dispatch]);
 
-  const handleSubscribe = async (tableId) => {
+  useEffect(() => {
+    if (token && token.userId) {
+      dispatch(getDatesWhereUserRegistered(token.userId));
+    }
+  }, [dispatch, token]);
+
+  const handleSubscribe = async (tableId, userId, tableDate) => {
     try {
-      await dispatch(addUserToTable(tableId));
-      setRegistrationStatus((prevState) => ({
-        ...prevState,
-        [tableId]: true,
-      }));
+      dispatch(addUserToTable(tableId, userId, tableDate));
     } catch (error) {
       console.error("Erreur lors de l'inscription :", error);
     }
   };
 
-  const handleUnsubscribe = async (tableId) => {
+  const handleUnsubscribe = async (tableId, userId) => {
     try {
-      await dispatch(removedUserToTable(tableId));
-      setRegistrationStatus((prevState) => ({
-        ...prevState,
-        [tableId]: false,
-      }));
+      dispatch(removedUserToTable(tableId, userId));
     } catch (error) {
       console.error("Erreur lors de la désinscription :", error);
     }
@@ -51,46 +50,76 @@ const GetAllTables = () => {
       ) : error ? (
         <p>Erreur: {error}</p>
       ) : tables && tables.length > 0 ? (
-        tables.map((table) => (
-          <div key={table.id}>
-            {registrationStatus[table.id] ? (
-              <UnsubscribeButton onLeave={() => handleUnsubscribe(table.id)} />
-            ) : (
-              <SubscribeButton onJoin={() => handleSubscribe(table.id)} />
-            )}
-            <p>nom: {table.name}</p>
-            <p>description: {table.description}</p>
-            <p>genres :</p>
-            {table.Rpg.Genres
-              ? table.Rpg.Genres.map((genre) => (
+        tables.map((table) => {
+          const isRegistered = userRegistrations?.registrationDates?.includes(
+            table.session_date
+          );
+          const isTableIdRegistered = userRegistrations?.tableIds?.includes(
+            table.id
+          );
+
+          return (
+            <div key={table.id}>
+              {!isRegistered &&
+                !isTableIdRegistered &&
+                token.userId !== table.author && (
+                  <SubscribeButton
+                    onJoin={() =>
+                      handleSubscribe(
+                        table.id,
+                        token.userId,
+                        table.session_date
+                      )
+                    }
+                  />
+                )}
+              {isTableIdRegistered && (
+                <UnsubscribeButton
+                  onLeave={() => handleUnsubscribe(table.id, token.userId)}
+                />
+              )}
+              <p>Nom: {table.name}</p>
+              <p>Description: {table.description}</p>
+              <p>Genres :</p>
+              {table.Rpg?.Genres?.length ? (
+                table.Rpg.Genres.map((genre) => (
                   <div key={genre.id}>
                     <p>{genre.genre}</p>
                   </div>
                 ))
-              : null}
-            <p>nombres de joueurs Maximum : {table.nb_players}</p>
-            <p>
-              nombres d&apos;inscrit : {table.registered.length} /{" "}
-              {table.nb_players}
-            </p>
-            <p>inscrit :</p>
-            {table.registeredUsers.length > 0
-              ? table.registeredUsers.map((registeredUser) => (
+              ) : (
+                <p>Aucun genre</p>
+              )}
+              <p>Nombres de joueurs Maximum : {table.nb_players}</p>
+              <p>
+                Nombres d&apos;inscrits : {table.registeredUsers?.length || 0} /{" "}
+                {table.nb_players}
+              </p>
+              <p>Inscrit :</p>
+              {table.registeredUsers?.length ? (
+                table.registeredUsers.map((registeredUser) => (
                   <div key={registeredUser.id}>
                     <p>
                       {registeredUser.firstname} {registeredUser.lastname}
                     </p>
                   </div>
                 ))
-              : null}
-            <p>images:</p>
-            <img src={`http://localhost:1500/${table.Rpg.images}`} alt="rpg" />
-            <p>
-              auteur: {table.User.firstname} {table.User.lastname}
-            </p>
-            <Link to={`/rpg/${table.id}`}>Voir les détails</Link>
-          </div>
-        ))
+              ) : (
+                <p>Aucun inscrit</p>
+              )}
+              <p>Images:</p>
+              <img
+                src={`http://localhost:1500/${table.Rpg?.images || ""}`}
+                alt="rpg"
+              />
+              <p>
+                Auteur: {table.User?.firstname || "Inconnu"}{" "}
+                {table.User?.lastname || "Inconnu"}
+              </p>
+              <Link to={`/rpg/${table.id}`}>Voir les détails</Link>
+            </div>
+          );
+        })
       ) : (
         <p>Aucune table de JDR n&apos;a été trouvée.</p>
       )}
