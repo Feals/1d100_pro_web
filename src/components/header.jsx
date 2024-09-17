@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import "../assets/css/header.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/action/authAction";
+import Nav from "../components/nav";
 
 function Header() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  console.log("token", token);
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -32,6 +32,7 @@ function Header() {
           <input id="recherche" type="search" defaultValue="recherche" />
           <input id="GO" type="submit" defaultValue="GO" />
         </div>
+        <Nav />
       </header>
     );
   } else {
@@ -70,6 +71,7 @@ function Header() {
           <input id="recherche" type="search" defaultValue="recherche" />
           <input id="GO" type="submit" defaultValue="GO" />
         </div>
+        <Nav />
       </header>
     );
   }
