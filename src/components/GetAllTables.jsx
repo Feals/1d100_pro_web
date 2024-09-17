@@ -41,7 +41,7 @@ const GetAllTables = () => {
       console.error("Erreur lors de la désinscription :", error);
     }
   };
-
+  console.log("tables", tables);
   return (
     <div>
       <h2>Les Tables :</h2>
@@ -62,7 +62,8 @@ const GetAllTables = () => {
             <div key={table.id}>
               {!isRegistered &&
                 !isTableIdRegistered &&
-                token.userId !== table.author && (
+                token.userId !== table.author &&
+                table.registeredUsers.length < table.nb_players && (
                   <SubscribeButton
                     onJoin={() =>
                       handleSubscribe(
