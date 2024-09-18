@@ -7,39 +7,38 @@ class Nav extends Component {
   render() {
     return (
       <div id="navigation">
-        <NavItem label="L'Association">
-          <NavLink to="/apropos">A PROPOS</NavLink>
+        <NavItem label="L'Association" className="main_nav">
+          <NavLink to="/about">A PROPOS</NavLink>
           <Separator />
-          <NavLink to="/le-jeu-de-role">
+          <NavLink to="/role-playing-game">
             {`LE JEU DE RÔLE (JDR). C'EST QUOI ?`}
           </NavLink>
           <Separator />
-          <NavLink to="/ou-nous-trouver">OÙ NOUS TROUVER</NavLink>
+          <NavLink to="/find-us">OÙ NOUS TROUVER</NavLink>
           <Separator />
-          <NavLink to="/devenir-membre">DEVENIR MEMBRE</NavLink>
+          <NavLink to="/become-member">DEVENIR MEMBRE</NavLink>
           <Separator />
-          <NavLink to="/nous-contacter">NOUS CONTACTER</NavLink>
+          <NavLink to="/contact">NOUS CONTACTER</NavLink>
         </NavItem>
 
         <NavItem label="Nos Tables">
-          <NavLink to="/planning">PLANNING</NavLink>
+          <NavLink to="/tables">PLANNING</NavLink>
           <Separator />
-          <NavLink to="/proposer-une-table">PROPOSER UNE TABLE (MJ)</NavLink>
-          <Separator />
-          <NavLink to="/etre-joueur">ÊTRE JOUEUR (PJ)</NavLink>
-          <Separator />
-          <NavLink to="/les-campagnes">LES CAMPAGNES</NavLink>
-          <Separator />
-          <NavLink to="/debuter-le-jdr">DÉBUTER LE JDR</NavLink>
+          {/* <NavLink to="/proposer-une-table">PROPOSER UNE TABLE (MJ)</NavLink> */}
+          {/* <Separator /> */}
+          {/* <NavLink to="/etre-joueur">ÊTRE JOUEUR (PJ)</NavLink> */}
+          {/* <Separator /> */}
+          {/* <NavLink to="/les-campagnes">LES CAMPAGNES</NavLink> */}
+          {/* <Separator /> */}
+          <NavLink to="/starting-rpg">DÉBUTER LE JDR</NavLink>
         </NavItem>
 
         <NavItem label="La Bibliothèque">
-          <NavLink to="/les-ouvrages">LES OUVRAGES</NavLink>
+          <NavLink to="/books">LES OUVRAGES</NavLink>
           <Separator />
-          <NavLink to="/emprunter-un-livre">EMPRUNTER UN LIVRE</NavLink>
+          <NavLink to="/borrow-book">EMPRUNTER UN LIVRE</NavLink>
         </NavItem>
-
-        <NavLink to="/contact">Contact</NavLink>
+        <NavItem label="Contact" to="/contact" className="no-submenu"></NavItem>
       </div>
     );
   }

@@ -12,6 +12,14 @@ import Library from "./pages/Library";
 import RpgById from "./pages/RpgById";
 import Tables from "./pages/Tables";
 import TableById from "./pages/TableById";
+import About from "./pages/About";
+import RolePlayingGame from "./pages/RolePlayingGame";
+import FindUs from "./pages/FindUs";
+import BecomeMember from "./pages/BecomeMember";
+import Contact from "./pages/Contact";
+import StratingRpg from "./pages/StratingRpg";
+import Books from "./pages/Books";
+import BorrowBook from "./pages/BorrowBook";
 
 const route = createBrowserRouter([
   {
@@ -27,8 +35,40 @@ const route = createBrowserRouter([
     element: <UserSignIn />,
   },
   {
+    path: "/about",
+    element: <About />,
+  },
+  {
+    path: "/role-playing-game",
+    element: <RolePlayingGame />,
+  },
+  {
+    path: "/find-us",
+    element: <FindUs />,
+  },
+  {
+    path: "/become-member",
+    element: <BecomeMember />,
+  },
+  {
+    path: "/starting-rpg",
+    element: <StratingRpg />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
+  },
+  {
     path: "/library",
     element: <Library />,
+  },
+  {
+    path: "/books",
+    element: <Books />,
+  },
+  {
+    path: "/borrow-book",
+    element: <BorrowBook />,
   },
   {
     path: "/rpg/:id",

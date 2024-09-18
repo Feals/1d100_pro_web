@@ -25,8 +25,7 @@ body {
 
 .contenuPage {
   flex: 1;
-  /* Ajoute une marge inférieure égale à la hauteur du footer */
-  margin-bottom: 15vh; /* Ajuste cette valeur selon la hauteur de ton footer */
+  margin-bottom: 15vh;
 }
 p {
   color: #fdf8e5;
@@ -96,7 +95,6 @@ button {
   color: #006685;
   background-color: #a9f1ee;
   font-weight: bold;
-  margin-top: 15px;
 }
 
 .center-button {

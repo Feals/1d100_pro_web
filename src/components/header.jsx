@@ -3,6 +3,8 @@ import "../assets/css/header.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/action/authAction";
 import Nav from "../components/nav";
+import SearchField from "./SearchField";
+import logoutIcon from "../../public/images/logoutIcon.png";
 
 function Header() {
   const dispatch = useDispatch();
@@ -10,11 +12,13 @@ function Header() {
   const handleLogout = () => {
     dispatch(logout());
   };
-  if (token) {
-    return (
-      <header>
-        <Link to="/">
-          <div id="titre_principal">
+  const handleSearch = (search) => {};
+
+  return (
+    <header>
+      <div className="horizontale">
+        <div id="main_title">
+          <Link to="/">
             <div id="logo">
               <img src="/images/logo1D100.png" alt="logo de 1D100" />
               <h1>
@@ -22,59 +26,48 @@ function Header() {
                 CLUB DE JDR
               </h1>
             </div>
-          </div>
-          <div id="shadow_title"></div>
-        </Link>
-
-        <div id="partie_droite">
-          <h2>{token.username}</h2>
-          <button onClick={handleLogout}>Déconnexion</button>
-          <input id="recherche" type="search" defaultValue="recherche" />
-          <input id="GO" type="submit" defaultValue="GO" />
+            <div id="title_shadow"></div>
+          </Link>
         </div>
-        <Nav />
-      </header>
-    );
-  } else {
-    return (
-      <header>
-        <Link to="/">
-          <div id="titre_principal">
-            <div id="logo">
-              <img src="/images/logo1D100.png" alt="logo de 1D100" />
-              <h1>
-                1D100 <br />
-                CLUB DE JDR
-              </h1>
+
+        <div id="header_right">
+          {token ? (
+            <>
+              <div className="horizontale">
+                <h4>
+                  {token.firstname} {token.lastname}
+                </h4>
+                <button onClick={handleLogout}>
+                  <img id="logout" src={logoutIcon} alt="Logout" />
+                </button>
+              </div>
+            </>
+          ) : (
+            <div id="login_section">
+              <nav>
+                <ul>
+                  <li>
+                    <Link to="/signup">{"S'inscrire"}</Link>
+                  </li>
+                  <li>
+                    <p>/</p>
+                  </li>
+                  <li>
+                    <Link to="/signin">Se connecter</Link>
+                  </li>
+                </ul>
+              </nav>
             </div>
-            <div id="shadow_title"></div>
-          </div>
-        </Link>
-
-        <div id="partie_droite">
-          <div id="connexion">
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/signup">Inscription</Link>
-                </li>
-                <li>
-                  <p>/</p>
-                </li>
-                <li>
-                  <Link to="/signin">Connexion</Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-
-          <input id="recherche" type="search" defaultValue="recherche" />
-          <input id="GO" type="submit" defaultValue="GO" />
+          )}
+          <section>
+            <SearchField onSearch={handleSearch} />
+          </section>
+          <div></div>
         </div>
-        <Nav />
-      </header>
-    );
-  }
+      </div>
+      <Nav />
+    </header>
+  );
 }
 
 export default Header;
