@@ -21,7 +21,11 @@ const AddTableForm = () => {
     loading: loadingRpgs,
     error: errorRpgs,
   } = useSelector((state) => state.rpgs);
-  const { table, loading: loadingTable } = useSelector((state) => state.tables);
+  const {
+    table,
+    loading: loadingTable,
+    error: errorTable,
+  } = useSelector((state) => state.tables);
 
   const token = useSelector((state) => state.auth.token);
   const userId = token ? token.userId : null;

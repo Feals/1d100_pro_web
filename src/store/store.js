@@ -6,6 +6,7 @@ import genreReducer from "./reducer/genreReducer";
 import rpgReducer from "./reducer/rpgReducer";
 import tableReducer from "./reducer/tableReducer";
 import userRegistrationsReducer from "./reducer/userRegistrationsReducer";
+import modalReducer from "./reducer/modalReducer";
 
 const persistConfig = {
   key: "root",
@@ -21,6 +22,7 @@ const store = configureStore({
     rpgs: rpgReducer,
     tables: tableReducer,
     userRegistrations: userRegistrationsReducer,
+    modal: modalReducer,
   },
 });
 
