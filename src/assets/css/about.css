@@ -1,4 +1,4 @@
-#Apropos {
+#about {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,19 +56,19 @@
   background-color: white;
 }
 
-#Apropos article {
+#about article {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-#Apropos p {
+#about p {
   width: 40vw;
   max-height: 80vh;
   margin: 10px;
 }
 
-#Apropos img {
+#about img {
   max-width: 100%;
   height: auto;
   margin: 10px;
