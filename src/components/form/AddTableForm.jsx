@@ -5,17 +5,17 @@ import {
   getTableById,
 } from "../../store/action/tableAction";
 import { addTableSchema } from "./validationSchemas";
-import FormContainer from "./FormContainer";
-import FormField from "./FormField";
+import FormContainer from "./formContainer";
+import FormField from "./formField";
 import { Field, ErrorMessage } from "formik";
 import { getAllRpgs } from "../../store/action/rpgAction";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import DatePickerField from "../DatePickerField";
+import PropTypes from "prop-types";
 
-const AddTableForm = () => {
+const AddTableForm = ({ tableId }) => {
+  console.log("tableId", tableId);
   const dispatch = useDispatch();
-  const { id } = useParams();
   const {
     rpgs,
     loading: loadingRpgs,
@@ -41,14 +41,13 @@ const AddTableForm = () => {
 
   useEffect(() => {
     dispatch(getAllRpgs());
-    if (id) {
-      dispatch(getTableById(id));
+    if (tableId) {
+      dispatch(getTableById(tableId));
     }
-  }, [dispatch, id]);
+  }, [dispatch, tableId]);
 
   useEffect(() => {
-    console.log("table", table);
-    if (table && id) {
+    if (table) {
       setInitialValues({
         name: table.name || "",
         description: table.description || "",
@@ -58,7 +57,7 @@ const AddTableForm = () => {
         author: userId,
       });
     }
-  }, [table, id, userId]);
+  }, [table, userId]);
 
   const handleSubmit = (values) => {
     const tableData = {
@@ -67,8 +66,8 @@ const AddTableForm = () => {
       author: userId,
     };
 
-    if (id) {
-      dispatch(updateTable({ id, values: tableData }));
+    if (tableId) {
+      dispatch(updateTable({ tableId, values: tableData }));
     } else {
       dispatch(addTable(tableData));
     }
@@ -78,6 +77,8 @@ const AddTableForm = () => {
     <div>
       {loadingTable ? (
         <p>Chargement des données de la table...</p>
+      ) : errorTable ? (
+        <p>Erreur: {errorTable}</p>
       ) : (
         <FormContainer
           initialValues={initialValues}
@@ -85,7 +86,7 @@ const AddTableForm = () => {
           onSubmit={handleSubmit}
           enableReinitialize={true}
         >
-          <h2>{id ? "Modifier une Table" : "Ajouter une Table"}</h2>
+          <h2>{tableId ? "Modifier une Table" : "Ajouter une Table"}</h2>
           <FormField label="Nom" name="name" type="text" />
           <FormField label="Description" name="description" type="text" />
           <FormField label="Nombre de joueurs" name="nbPlayers" type="number" />
@@ -119,6 +120,10 @@ const AddTableForm = () => {
       )}
     </div>
   );
+};
+
+AddTableForm.propTypes = {
+  tableId: PropTypes.number.isRequired,
 };
 
 export default AddTableForm;

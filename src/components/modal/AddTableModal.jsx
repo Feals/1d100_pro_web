@@ -1,9 +1,9 @@
-import GenericModal from "./GenericModal";
-import AddTableForm from "../form/AddTableForm";
+import GenericModal from "./genericModal";
+import AddTableForm from "../form/addTableForm";
 
 const AddTableModal = () => {
   return (
-    <GenericModal initialButtonText="Ouvrir la Modale pour Ajouter une Table">
+    <GenericModal initialButtonText="Ajouter une Table">
       <AddTableForm />
     </GenericModal>
   );

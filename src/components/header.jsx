@@ -3,7 +3,7 @@ import "../assets/css/header.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/action/authAction";
 import Nav from "../components/nav";
-import SearchField from "./SearchField";
+import SearchField from "./searchField";
 import logoutIcon from "../../public/images/logoutIcon.png";
 
 function Header() {

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addRpg, updateRpg, getRpgById } from "../../store/action/rpgAction";
 import { addRpgSchema } from "./validationSchemas";
-import FormContainer from "./FormContainer";
-import FormField from "./FormField";
+import FormContainer from "./formContainer";
+import FormField from "./formField";
 import { Field, ErrorMessage, FieldArray } from "formik";
 import { getAllGenres } from "../../store/action/genreAction";
 import { useEffect, useState } from "react";

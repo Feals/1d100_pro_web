@@ -1,4 +1,4 @@
-import Layout from "./Layout";
+import Layout from "./layout";
 import AddRpgForm from "../components/form/AddRpgForm";
 
 function RpgById() {

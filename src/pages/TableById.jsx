@@ -1,5 +1,5 @@
-import Layout from "./Layout";
-import AddTableForm from "../components/form/AddTableForm";
+import Layout from "./layout";
+import AddTableForm from "../components/form/addTableForm";
 function TableById() {
   return (
     <div id="bloc_page">

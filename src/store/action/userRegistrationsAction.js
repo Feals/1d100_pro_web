@@ -24,7 +24,6 @@ export const getDatesWhereUserRegistered = (id) => {
       }
 
       const datesWhereUserRegistered = await response.json();
-      console.log("datesWhereUserRegistered", datesWhereUserRegistered);
       dispatch(
         getDatesWhereUserRegisteredActions.success(datesWhereUserRegistered)
       );

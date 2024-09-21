@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { signUp } from "../../store/action/authAction";
 import { SignupSchema } from "./validationSchemas";
-import FormContainer from "./FormContainer";
-import FormField from "./FormField";
+import FormContainer from "./formContainer";
+import FormField from "./formField";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();

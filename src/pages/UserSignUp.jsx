@@ -1,5 +1,5 @@
-import Layout from "./Layout";
-import SignUpForm from "../components/form/SignUpForm";
+import Layout from "./layout";
+import SignUpForm from "../components/form/signUpForm";
 
 function UserSignUp() {
   return (

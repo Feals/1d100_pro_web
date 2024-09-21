@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTables } from "../store/action/tableAction";
 import { getDatesWhereUserRegistered } from "../store/action/userRegistrationsAction";
@@ -9,12 +9,16 @@ import {
   addUserToTable,
   removedUserToTable,
 } from "../store/action/userRegistrationsAction";
+import EditTableModal from "./modal/editTableModal";
+import GenericModal from "./modal/genericModal"; // Import de la modale générique
 
 const GetAllTables = () => {
   const dispatch = useDispatch();
   const { tables, loading, error } = useSelector((state) => state.tables);
   const { token } = useSelector((state) => state.auth);
   const { userRegistrations } = useSelector((state) => state.userRegistrations);
+  const [selectedTableId, setSelectedTableId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getAllTables());
@@ -41,7 +45,17 @@ const GetAllTables = () => {
       console.error("Erreur lors de la désinscription :", error);
     }
   };
-  console.log("tables", tables);
+
+  const openEditModal = (tableId) => {
+    setSelectedTableId(tableId); // Met à jour l'ID de la table sélectionnée
+    setIsModalOpen(true); // Ouvre la modale
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedTableId(null); // Réinitialise l'ID lors de la fermeture
+  };
+  console.log("selectedTableId", selectedTableId);
   return (
     <div>
       <h2>Les Tables :</h2>
@@ -79,6 +93,9 @@ const GetAllTables = () => {
                   onLeave={() => handleUnsubscribe(table.id, token.userId)}
                 />
               )}
+              <button onClick={() => openEditModal(table.id)}>
+                Modifier la Table
+              </button>
               <p>Nom: {table.name}</p>
               <p>Description: {table.description}</p>
               <p>Genres :</p>
@@ -123,6 +140,13 @@ const GetAllTables = () => {
         })
       ) : (
         <p>Aucune table de JDR n&apos;a été trouvée.</p>
+      )}
+
+      {isModalOpen && (
+        <GenericModal>
+          <EditTableModal tableId={selectedTableId} />
+          <button onClick={closeModal}>Fermer</button>
+        </GenericModal>
       )}
     </div>
   );

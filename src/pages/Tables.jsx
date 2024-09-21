@@ -1,6 +1,6 @@
-import Layout from "./Layout";
-import AddTableModal from "../components/modal/AddTableModal";
-import GetAllTables from "../components/GetAllTables";
+import Layout from "./layout";
+import AddTableModal from "../components/modal/addTableModal";
+import GetAllTables from "../components/getAllTables";
 
 function Tables() {
   return (
