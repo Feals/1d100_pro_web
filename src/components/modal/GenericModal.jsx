@@ -3,29 +3,38 @@ import { openModal, closeModal } from "../../store/action/modalAction";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import "../../assets/css/GenericModal.css";
+import GenericButton from "../bouton/genericButton";
 
 const GenericModal = ({ children, initialButtonText }) => {
   const isOpen = useSelector((state) => state.modal.isOpen);
   const dispatch = useDispatch();
   const [buttonText, setButtonText] = useState(initialButtonText);
-
   const handleOpenModal = () => {
     dispatch(openModal());
   };
 
   const handleCloseModal = () => {
     dispatch(closeModal());
+
     setButtonText(initialButtonText);
   };
 
   return (
     <div>
-      <button onClick={handleOpenModal}>{buttonText}</button>
+      <GenericButton
+        actionType="modal"
+        onAction={() => handleOpenModal()}
+        buttonLabel={buttonText}
+      />
       {isOpen && (
         <div className="modal-backdrop">
           <div className="modal">
             {children}
-            <button onClick={handleCloseModal}>Fermer la Modal</button>
+            <GenericButton
+              actionType="modal"
+              onAction={handleCloseModal}
+              buttonLabel="Fermer la Modal"
+            />
           </div>
         </div>
       )}

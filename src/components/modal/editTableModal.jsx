@@ -11,7 +11,9 @@ const EditTableModal = ({ tableId }) => {
 };
 
 EditTableModal.propTypes = {
-  tableId: PropTypes.number,
+  tableId: PropTypes.number.isRequired,
+  onEditClick: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default EditTableModal;

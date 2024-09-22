@@ -34,6 +34,7 @@ p {
 }
 section {
   background: url("../../public/images/fond.png");
+  margin-top: 1em;
 }
 section p {
   color: black;

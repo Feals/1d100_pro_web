@@ -60,7 +60,7 @@ export const updateTable = (userData) => {
     dispatch(updateTableActions.request());
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/rpgTables/${userData.id}`,
+        `${import.meta.env.VITE_API_URL}/rpgTables/${userData.tableId}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

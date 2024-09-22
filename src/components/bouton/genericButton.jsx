@@ -9,6 +9,8 @@ const GenericButton = ({ actionType, onAction, buttonLabel, buttonStyle }) => {
         return { color: "red", ...buttonStyle };
       default:
         return buttonStyle;
+      case "modal":
+        return { color: "blue", ...buttonStyle };
     }
   };
 
@@ -20,7 +22,7 @@ const GenericButton = ({ actionType, onAction, buttonLabel, buttonStyle }) => {
 };
 
 GenericButton.propTypes = {
-  actionType: PropTypes.oneOf(["join", "leave"]),
+  actionType: PropTypes.oneOf(["join", "leave", "modal"]),
   onAction: PropTypes.func.isRequired,
   buttonLabel: PropTypes.string.isRequired,
   buttonStyle: PropTypes.object,

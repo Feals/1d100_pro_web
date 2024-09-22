@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTables } from "../store/action/tableAction";
 import { getDatesWhereUserRegistered } from "../store/action/userRegistrationsAction";
+import { setModalData } from "../store/action/modalAction";
+
 import SubscribeButton from "./bouton/subscribeButton";
 import UnsubscribeButton from "./bouton/unsubscribeButton";
 import {
@@ -10,7 +12,6 @@ import {
   removedUserToTable,
 } from "../store/action/userRegistrationsAction";
 import EditTableModal from "./modal/editTableModal";
-import GenericModal from "./modal/genericModal"; // Import de la modale générique
 
 const GetAllTables = () => {
   const dispatch = useDispatch();
@@ -18,11 +19,17 @@ const GetAllTables = () => {
   const { token } = useSelector((state) => state.auth);
   const { userRegistrations } = useSelector((state) => state.userRegistrations);
   const [selectedTableId, setSelectedTableId] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isOpen } = useSelector((state) => state.modal);
 
   useEffect(() => {
     dispatch(getAllTables());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setSelectedTableId(null);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (token && token.userId) {
@@ -46,16 +53,17 @@ const GetAllTables = () => {
     }
   };
 
-  const openEditModal = (tableId) => {
-    setSelectedTableId(tableId); // Met à jour l'ID de la table sélectionnée
-    setIsModalOpen(true); // Ouvre la modale
+  const handleEditClick = (tableId) => {
+    if (!isOpen) {
+      setSelectedTableId(tableId);
+    }
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedTableId(null); // Réinitialise l'ID lors de la fermeture
-  };
-  console.log("selectedTableId", selectedTableId);
+  useEffect(() => {
+    dispatch(setModalData());
+  }, [dispatch]);
+
+  console.log("tableId", selectedTableId);
   return (
     <div>
       <h2>Les Tables :</h2>
@@ -93,9 +101,11 @@ const GetAllTables = () => {
                   onLeave={() => handleUnsubscribe(table.id, token.userId)}
                 />
               )}
-              <button onClick={() => openEditModal(table.id)}>
-                Modifier la Table
-              </button>
+
+              <div onClick={() => handleEditClick(table.id)}>
+                <EditTableModal tableId={selectedTableId} />
+              </div>
+
               <p>Nom: {table.name}</p>
               <p>Description: {table.description}</p>
               <p>Genres :</p>
@@ -140,13 +150,6 @@ const GetAllTables = () => {
         })
       ) : (
         <p>Aucune table de JDR n&apos;a été trouvée.</p>
-      )}
-
-      {isModalOpen && (
-        <GenericModal>
-          <EditTableModal tableId={selectedTableId} />
-          <button onClick={closeModal}>Fermer</button>
-        </GenericModal>
       )}
     </div>
   );

@@ -8,7 +8,6 @@ function Tables() {
       <Layout>
         <AddTableModal />
         <section>
-          <h1 className="blueText">Nos Tables</h1>
           <GetAllTables />
         </section>
       </Layout>

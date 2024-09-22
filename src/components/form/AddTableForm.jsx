@@ -14,8 +14,8 @@ import DatePickerField from "../DatePickerField";
 import PropTypes from "prop-types";
 
 const AddTableForm = ({ tableId }) => {
-  console.log("tableId", tableId);
   const dispatch = useDispatch();
+
   const {
     rpgs,
     loading: loadingRpgs,
@@ -41,13 +41,13 @@ const AddTableForm = ({ tableId }) => {
 
   useEffect(() => {
     dispatch(getAllRpgs());
-    if (tableId) {
+    if (tableId && (!table || table.id !== tableId)) {
       dispatch(getTableById(tableId));
     }
-  }, [dispatch, tableId]);
+  }, [dispatch, tableId, table]);
 
   useEffect(() => {
-    if (table) {
+    if (table && tableId && table.id === tableId) {
       setInitialValues({
         name: table.name || "",
         description: table.description || "",
@@ -57,7 +57,7 @@ const AddTableForm = ({ tableId }) => {
         author: userId,
       });
     }
-  }, [table, userId]);
+  }, [table, userId, tableId]);
 
   const handleSubmit = (values) => {
     const tableData = {
@@ -87,8 +87,11 @@ const AddTableForm = ({ tableId }) => {
           enableReinitialize={true}
         >
           <h2>{tableId ? "Modifier une Table" : "Ajouter une Table"}</h2>
+
           <FormField label="Nom" name="name" type="text" />
+
           <FormField label="Description" name="description" type="text" />
+
           <FormField label="Nombre de joueurs" name="nbPlayers" type="number" />
 
           {loadingRpgs ? (
@@ -123,7 +126,7 @@ const AddTableForm = ({ tableId }) => {
 };
 
 AddTableForm.propTypes = {
-  tableId: PropTypes.number.isRequired,
+  tableId: PropTypes.number,
 };
 
 export default AddTableForm;
