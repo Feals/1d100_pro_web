@@ -63,7 +63,6 @@ const GetAllTables = () => {
     dispatch(setModalData());
   }, [dispatch]);
 
-  console.log("tableId", selectedTableId);
   return (
     <div>
       <h2>Les Tables :</h2>

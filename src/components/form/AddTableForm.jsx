@@ -48,12 +48,13 @@ const AddTableForm = ({ tableId }) => {
 
   useEffect(() => {
     if (table && tableId && table.id === tableId) {
+      console.log("table", table);
       setInitialValues({
         name: table.name || "",
         description: table.description || "",
-        nbPlayers: table.nbPlayers || "",
-        rpgId: table.rpgId || null,
-        sessionDate: table.sessionDate ? new Date(table.sessionDate) : null,
+        nbPlayers: table.nb_players || "",
+        rpgId: table.rpg_id || null,
+        sessionDate: table.session_date ? new Date(table.session_date) : null,
         author: userId,
       });
     }

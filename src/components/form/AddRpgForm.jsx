@@ -74,7 +74,7 @@ const AddRpgForm = () => {
           ) : (
             <FieldArray
               name="genreIds"
-              render={({ push, remove }) => (
+              render={(arrayHelpers) => (
                 <div>
                   <label htmlFor="genres">Genres</label>
                   {genres.length > 0 ? (
@@ -85,14 +85,22 @@ const AddRpgForm = () => {
                             type="checkbox"
                             name="genreIds"
                             value={genre.id}
-                            checked={initialValues.genreIds.includes(genre.id)}
+                            checked={arrayHelpers.form.values.genreIds.includes(
+                              genre.id
+                            )}
                             onChange={() => {
-                              if (initialValues.genreIds.includes(genre.id)) {
-                                remove(
-                                  initialValues.genreIds.indexOf(genre.id)
+                              if (
+                                arrayHelpers.form.values.genreIds.includes(
+                                  genre.id
+                                )
+                              ) {
+                                arrayHelpers.remove(
+                                  arrayHelpers.form.values.genreIds.indexOf(
+                                    genre.id
+                                  )
                                 );
                               } else {
-                                push(genre.id);
+                                arrayHelpers.push(genre.id);
                               }
                             }}
                           />
