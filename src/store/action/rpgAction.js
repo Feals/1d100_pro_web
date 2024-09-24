@@ -4,6 +4,10 @@ import {
   updateRpgActions,
   getRpgByIdActions,
 } from "./actionCreator";
+import {
+  showSuccessToast,
+  showErrorToast,
+} from "../../components/toast/toastService";
 
 export const addRpg = (userData) => {
   return async (dispatch) => {
@@ -30,8 +34,10 @@ export const addRpg = (userData) => {
 
       const data = await response.json();
       dispatch(addRpgActions.success(data));
+      showSuccessToast("Le JDR a été créé avec succès !");
     } catch (error) {
       dispatch(addRpgActions.failure(error.message));
+      showErrorToast(error.message);
     }
   };
 };
@@ -83,6 +89,7 @@ export const updateRpg = (userData) => {
 
       const data = await response.json();
       dispatch(updateRpgActions.success(data));
+      showSuccessToast("Le JDR a été modifié avec succès !");
     } catch (error) {
       dispatch(updateRpgActions.failure(error.message));
     }

@@ -3,6 +3,10 @@ import {
   addUserToTableActions,
   removedUserToTableActions,
 } from "./actionCreator";
+import {
+  showSuccessToast,
+  showErrorToast,
+} from "../../components/toast/toastService";
 
 export const getDatesWhereUserRegistered = (id) => {
   return async (dispatch) => {
@@ -54,8 +58,10 @@ export const addUserToTable = (tableId, userId, sessionDate) => {
 
       const data = await response.json();
       dispatch(addUserToTableActions.success(data));
+      showSuccessToast("Votre inscription à la table a été pris en compte !");
     } catch (error) {
       dispatch(addUserToTableActions.failure(error.message));
+      showErrorToast(error.message);
     }
   };
 };
@@ -79,8 +85,12 @@ export const removedUserToTable = (tableId, userId) => {
 
       const data = await response.json();
       dispatch(removedUserToTableActions.success(data));
+      showSuccessToast(
+        "Votre désinscription à la table a été pris en compte !"
+      );
     } catch (error) {
       dispatch(removedUserToTableActions.failure(error.message));
+      showErrorToast(error.message);
     }
   };
 };

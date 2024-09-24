@@ -1,5 +1,9 @@
 import { signUpActions, signInActions } from "./actionCreator";
 import { jwtDecode } from "jwt-decode";
+import {
+  showSuccessToast,
+  showErrorToast,
+} from "../../components/toast/toastService";
 
 export const signUp = (userData) => {
   return async (dispatch) => {
@@ -21,8 +25,10 @@ export const signUp = (userData) => {
 
       const data = await response.json();
       dispatch(signUpActions.success(data.token));
+      showSuccessToast("Votre compte a été créé avec succès !");
     } catch (error) {
       dispatch(signUpActions.failure(error.message));
+      showErrorToast(error.message);
     }
   };
 };
@@ -50,6 +56,7 @@ export const signIn = (userData) => {
       dispatch(signInActions.success(decodedToken));
     } catch (error) {
       dispatch(signInActions.failure(error.message));
+      showErrorToast(error.message);
     }
   };
 };

@@ -48,7 +48,6 @@ const AddTableForm = ({ tableId }) => {
 
   useEffect(() => {
     if (table && tableId && table.id === tableId) {
-      console.log("table", table);
       setInitialValues({
         name: table.name || "",
         description: table.description || "",

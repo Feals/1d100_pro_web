@@ -4,6 +4,10 @@ import {
   updateTableActions,
   getTableByIdActions,
 } from "./actionCreator";
+import {
+  showSuccessToast,
+  showErrorToast,
+} from "../../components/toast/toastService";
 
 export const addTable = (userData) => {
   return async (dispatch) => {
@@ -24,8 +28,10 @@ export const addTable = (userData) => {
 
       const data = await response.json();
       dispatch(addTableActions.success(data));
+      showSuccessToast("Table de JDR créée avec succès !");
     } catch (error) {
       dispatch(addTableActions.failure(error.message));
+      showErrorToast(error.message);
     }
   };
 };
@@ -74,8 +80,10 @@ export const updateTable = (userData) => {
 
       const data = await response.json();
       dispatch(updateTableActions.success(data));
+      showSuccessToast("Table mise à jour avec succès !");
     } catch (error) {
       dispatch(updateTableActions.failure(error.message));
+      showErrorToast(error.message);
     }
   };
 };

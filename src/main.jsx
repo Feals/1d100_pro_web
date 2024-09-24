@@ -20,6 +20,8 @@ import Contact from "./pages/Contact";
 import StratingRpg from "./pages/StratingRpg";
 import Books from "./pages/Books";
 import BorrowBook from "./pages/BorrowBook";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const route = createBrowserRouter([
   {
@@ -86,6 +88,7 @@ const route = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    <ToastContainer />
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <RouterProvider router={route} />
