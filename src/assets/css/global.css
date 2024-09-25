@@ -98,3 +98,17 @@ button {
 .blueText {
   color: #006685;
 }
+
+h5 {
+  font-size: 1.5em;
+  margin: 1em;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+}
+
+.info-row h5 {
+  margin-right: 10px;
+}

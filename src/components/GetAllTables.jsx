@@ -12,6 +12,7 @@ import {
   removedUserToTable,
 } from "../store/action/userRegistrationsAction";
 import EditTableModal from "./modal/editTableModal";
+import "../assets/css/table.css";
 
 const GetAllTables = () => {
   const dispatch = useDispatch();
@@ -62,9 +63,8 @@ const GetAllTables = () => {
   useEffect(() => {
     dispatch(setModalData());
   }, [dispatch]);
-
   return (
-    <div>
+    <div className="container">
       <h2>Les Tables :</h2>
       {loading ? (
         <p>Chargement des Tables de JDR...</p>
@@ -80,70 +80,96 @@ const GetAllTables = () => {
           );
 
           return (
-            <div key={table.id}>
-              {!isRegistered &&
-                !isTableIdRegistered &&
-                token.userId !== table.author &&
-                table.registeredUsers.length < table.nb_players && (
-                  <SubscribeButton
-                    onJoin={() =>
-                      handleSubscribe(
-                        table.id,
-                        token.userId,
-                        table.session_date
-                      )
-                    }
+            <div key={table.id} className={`container_table`}>
+              <div className="composents_positions">
+                {!isRegistered &&
+                  !isTableIdRegistered &&
+                  token.userId !== table.author &&
+                  table.registeredUsers.length < table.nb_players && (
+                    <SubscribeButton
+                      onJoin={() =>
+                        handleSubscribe(
+                          table.id,
+                          token.userId,
+                          table.session_date
+                        )
+                      }
+                    />
+                  )}
+                {isTableIdRegistered && (
+                  <UnsubscribeButton
+                    onLeave={() => handleUnsubscribe(table.id, token.userId)}
                   />
                 )}
-              {isTableIdRegistered && (
-                <UnsubscribeButton
-                  onLeave={() => handleUnsubscribe(table.id, token.userId)}
-                />
-              )}
 
-              <div onClick={() => handleEditClick(table.id)}>
-                <EditTableModal tableId={selectedTableId} />
+                <div onClick={() => handleEditClick(table.id)}>
+                  <EditTableModal tableId={selectedTableId} />
+                </div>
               </div>
 
-              <p>Nom: {table.name}</p>
-              <p>Description: {table.description}</p>
-              <p>Genres :</p>
-              {table.Rpg?.Genres?.length ? (
-                table.Rpg.Genres.map((genre) => (
-                  <div key={genre.id}>
-                    <p>{genre.genre}</p>
+              <div className="composents_positions">
+                <div>
+                  <div className="info-row">
+                    <h5>Nom :</h5>
+                    <p>{table.name}</p>
                   </div>
-                ))
-              ) : (
-                <p>Aucun genre</p>
-              )}
-              <p>Nombres de joueurs Maximum : {table.nb_players}</p>
-              <p>
-                Nombres d&apos;inscrits : {table.registeredUsers?.length || 0} /{" "}
-                {table.nb_players}
-              </p>
-              <p>Inscrit :</p>
-              {table.registeredUsers?.length ? (
-                table.registeredUsers.map((registeredUser) => (
-                  <div key={registeredUser.id}>
+                  <div className="info-row">
+                    <h5>Description :</h5>
+                    <p>{table.description}</p>
+                  </div>
+                  <div className="info-row">
+                    <h5>Genres :</h5>
+
+                    {table.Rpg?.Genres?.length ? (
+                      table.Rpg.Genres.map((genre) => (
+                        <div key={genre.id}>
+                          <p>{genre.genre}</p>
+                        </div>
+                      ))
+                    ) : (
+                      <p>Aucun genre</p>
+                    )}
+                  </div>
+                  <div className="info-row">
+                    <h5>Nombres de joueurs Maximum :</h5>
+                    <p> {table.nb_players}</p>
+                  </div>
+                  <div className="info-row">
+                    <h5>Nombres d&apos;inscrits : </h5>
                     <p>
-                      {registeredUser.firstname} {registeredUser.lastname}
+                      {table.registeredUsers?.length || 0} / {table.nb_players}
                     </p>
                   </div>
-                ))
-              ) : (
-                <p>Aucun inscrit</p>
-              )}
-              <p>Images:</p>
-              <img
-                src={`http://localhost:1500/${table.Rpg?.images || ""}`}
-                alt="rpg"
-              />
+                  <div className="info-row">
+                    <h5>Inscrit:</h5>
+
+                    {table.registeredUsers?.length ? (
+                      table.registeredUsers.map((registeredUser) => (
+                        <div key={registeredUser.id}>
+                          <p>
+                            {registeredUser.firstname} {registeredUser.lastname}
+                          </p>
+                        </div>
+                      ))
+                    ) : (
+                      <p>Aucun inscrit</p>
+                    )}
+                  </div>
+                </div>
+
+                <img
+                  src={`http://localhost:1500/${table.Rpg?.images || ""}`}
+                  alt="rpg"
+                />
+              </div>
+              <h5>Auteur:</h5>
               <p>
-                Auteur: {table.User?.firstname || "Inconnu"}{" "}
+                {table.User?.firstname || "Inconnu"}{" "}
                 {table.User?.lastname || "Inconnu"}
               </p>
-              <Link to={`/rpg/${table.id}`}>Voir les détails</Link>
+              <Link to={`/rpg/${table.id}`} className="link">
+                Voir les détails
+              </Link>
             </div>
           );
         })
