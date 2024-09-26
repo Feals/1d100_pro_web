@@ -24,6 +24,8 @@ class Nav extends Component {
         <NavItem label="Nos Tables">
           <NavLink to="/tables">PLANNING</NavLink>
           <Separator />
+          <NavLink to="/library">Les JDRs du club</NavLink>
+          <Separator />
           {/* <NavLink to="/proposer-une-table">PROPOSER UNE TABLE (MJ)</NavLink> */}
           {/* <Separator /> */}
           {/* <NavLink to="/etre-joueur">ÊTRE JOUEUR (PJ)</NavLink> */}

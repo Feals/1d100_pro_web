@@ -12,7 +12,7 @@ import {
   removedUserToTable,
 } from "../store/action/userRegistrationsAction";
 import EditTableModal from "./modal/editTableModal";
-import "../assets/css/table.css";
+import "../assets/css/tableAndRpg.css";
 
 const GetAllTables = () => {
   const dispatch = useDispatch();
@@ -80,7 +80,7 @@ const GetAllTables = () => {
           );
 
           return (
-            <div key={table.id} className={`container_table`}>
+            <div key={table.id} className={`container_table_and_rpg`}>
               <div className="composents_positions">
                 {!isRegistered &&
                   !isTableIdRegistered &&
@@ -156,11 +156,12 @@ const GetAllTables = () => {
                     )}
                   </div>
                 </div>
-
-                <img
-                  src={`http://localhost:1500/${table.Rpg?.images || ""}`}
-                  alt="rpg"
-                />
+                <div className="image-container">
+                  <img
+                    src={`http://localhost:1500/${table.Rpg?.images || ""}`}
+                    alt="rpg"
+                  />
+                </div>
               </div>
               <h5>Auteur:</h5>
               <p>

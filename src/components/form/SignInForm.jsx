@@ -1,11 +1,16 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../store/action/authAction";
 import { SigninSchema } from "./validationSchemas";
 import FormContainer from "./formContainer";
 import FormField from "./formField";
+import { useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const token = useSelector((state) => state.auth.token);
+  console.log("token", token);
 
   const initialValues = {
     mail: "",
@@ -13,7 +18,7 @@ const SignInForm = () => {
   };
 
   const handleSubmit = (values) => {
-    dispatch(signIn(values));
+    dispatch(signIn(values, navigate));
   };
 
   return (

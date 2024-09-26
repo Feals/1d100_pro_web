@@ -23,7 +23,8 @@ export default function authReducer(state = initialState, action) {
 
   switch (action.type) {
     case "LOGOUT":
-      return { ...initialState };
+      return { ...initialState, isAuthenticated: false };
+
     default:
       return state;
   }

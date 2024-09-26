@@ -25,6 +25,7 @@ export const signUp = (userData) => {
 
       const data = await response.json();
       dispatch(signUpActions.success(data.token));
+
       showSuccessToast("Votre compte a été créé avec succès !");
     } catch (error) {
       dispatch(signUpActions.failure(error.message));
@@ -33,7 +34,7 @@ export const signUp = (userData) => {
   };
 };
 
-export const signIn = (userData) => {
+export const signIn = (userData, navigate) => {
   return async (dispatch) => {
     dispatch(signInActions.request());
 
@@ -54,6 +55,8 @@ export const signIn = (userData) => {
       const data = await response.json();
       const decodedToken = jwtDecode(data.token);
       dispatch(signInActions.success(decodedToken));
+      navigate("/");
+      showSuccessToast("Vous êtes maintenant connecté !");
     } catch (error) {
       dispatch(signInActions.failure(error.message));
       showErrorToast(error.message);

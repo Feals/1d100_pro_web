@@ -1,4 +1,4 @@
-.table {
+.table_and_rpg {
   display: flex;
   flex-direction: row;
   border: 5px solid #d0551c;
@@ -10,7 +10,7 @@
   margin-bottom: 10px;
 }
 
-.table img {
+.table_and_rpg img {
   width: 25vw;
 }
 
@@ -28,7 +28,7 @@
   margin: 20px;
 }
 
-.container_table {
+.container_table_and_rpg {
   display: flex;
   flex-direction: column;
   width: 80vw;
@@ -41,13 +41,6 @@
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.table img {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  border-radius: 8px;
 }
 
 h2 {
@@ -74,4 +67,15 @@ p {
 .add_table {
   padding-left: 2em;
   padding-top: 2em;
+}
+
+.image-container {
+  max-width: 50em;
+  width: 100%;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
