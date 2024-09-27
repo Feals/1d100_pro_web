@@ -73,3 +73,27 @@ h2 {
   position: relative;
   left: -10vw;
 }
+
+@media (max-width: 768px) {
+  #banniere_image {
+    display: none;
+  }
+
+  #explication h2 {
+    font-size: 1em;
+  }
+  #explication h2 {
+    position: relative;
+    left: -10vw;
+  }
+
+  #planning h2 {
+    position: relative;
+    left: 10vw;
+  }
+
+  #actus h2 {
+    position: relative;
+    left: -10vw;
+  }
+}

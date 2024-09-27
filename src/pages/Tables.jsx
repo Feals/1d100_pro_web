@@ -1,7 +1,7 @@
 import Layout from "./layout";
 import AddTableModal from "../components/modal/addTableModal";
 import GetAllTables from "../components/getAllTables";
-import "../assets/css/table.css";
+import "../assets/css/TableAndRpg.css";
 
 function Tables() {
   return (

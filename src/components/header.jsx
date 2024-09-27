@@ -50,7 +50,7 @@ function Header() {
                     <Link to="/signup">{"S'inscrire"}</Link>
                   </li>
                   <li>
-                    <p>/</p>
+                    <p className="display_none">/</p>
                   </li>
                   <li>
                     <Link to="/signin">Se connecter</Link>
@@ -59,10 +59,9 @@ function Header() {
               </nav>
             </div>
           )}
-          <section>
+          <section className="display_none">
             <SearchField onSearch={handleSearch} />
           </section>
-          <div></div>
         </div>
       </div>
       <Nav />

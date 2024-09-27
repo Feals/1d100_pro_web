@@ -1,11 +1,3 @@
-@font-face {
-  font-family: "Roblox";
-  src: url("../../public/polices/Roblox_Font_Black.otf") format("opentype"),
-    url("../../public/polices/Roblox_Font_Black.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
 #navigation {
   display: flex;
   justify-content: space-between;
@@ -71,4 +63,27 @@
   color: #006685;
   margin: 0px;
   font-size: 1.5em;
+}
+
+@media (max-width: 768px) {
+  #navigation {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 20px;
+  }
+
+  #navigation a {
+    font-size: 1.5em;
+  }
+
+  .nav-item {
+    text-align: center;
+    padding-bottom: 0;
+    position: static;
+  }
+
+  .nav-item .submenu {
+    position: absolute;
+  }
 }

@@ -112,3 +112,8 @@ h5 {
 .info-row h5 {
   margin-right: 10px;
 }
+@media (max-width: 768px) {
+  .display_none {
+    display: none;
+  }
+}
