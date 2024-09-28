@@ -15,12 +15,13 @@
 
 body {
   font-family: "Roblox", Arial, sans-serif;
-  margin: auto;
   margin: 0;
-  padding: 0;
+}
+
+#body {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .contenuPage {
@@ -112,6 +113,15 @@ h5 {
 .info-row h5 {
   margin-right: 10px;
 }
+.site-content {
+  flex: 1;
+}
+
+.error {
+  color: red;
+  margin-top: 0.5em;
+}
+
 @media (max-width: 768px) {
   .display_none {
     display: none;

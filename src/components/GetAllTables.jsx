@@ -7,13 +7,14 @@ import { setModalData } from "../store/action/modalAction";
 
 import SubscribeButton from "./bouton/subscribeButton";
 import UnsubscribeButton from "./bouton/unsubscribeButton";
+import DeleteButton from "./bouton/deleteButton";
 import {
   addUserToTable,
   removedUserToTable,
 } from "../store/action/userRegistrationsAction";
 import EditTableModal from "./modal/editTableModal";
 import "../assets/css/tableAndRpg.css";
-
+import { deleteTable } from "../store/action/tableAction";
 const GetAllTables = () => {
   const dispatch = useDispatch();
   const { tables, loading, error } = useSelector((state) => state.tables);
@@ -22,6 +23,9 @@ const GetAllTables = () => {
   const [selectedTableId, setSelectedTableId] = useState(null);
   const { isOpen } = useSelector((state) => state.modal);
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
   useEffect(() => {
     dispatch(getAllTables());
   }, [dispatch]);
@@ -40,17 +44,28 @@ const GetAllTables = () => {
 
   const handleSubscribe = async (tableId, userId, tableDate) => {
     try {
-      dispatch(addUserToTable(tableId, userId, tableDate));
+      await dispatch(addUserToTable(tableId, userId, tableDate));
     } catch (error) {
       console.error("Erreur lors de l'inscription :", error);
     }
+    handleRefresh();
   };
 
   const handleUnsubscribe = async (tableId, userId) => {
     try {
       dispatch(removedUserToTable(tableId, userId));
+      dispatch(getAllTables());
     } catch (error) {
       console.error("Erreur lors de la désinscription :", error);
+    }
+    handleRefresh();
+  };
+
+  const handleDeleteTable = async (tableId) => {
+    try {
+      await dispatch(deleteTable(tableId));
+    } catch (error) {
+      console.error("Erreur lors de la suppression de la table :", error);
     }
   };
 
@@ -63,6 +78,7 @@ const GetAllTables = () => {
   useEffect(() => {
     dispatch(setModalData());
   }, [dispatch]);
+  console.log("token", token);
   return (
     <div className="container">
       <h2>Les Tables :</h2>
@@ -84,6 +100,7 @@ const GetAllTables = () => {
               <div className="composents_positions">
                 {!isRegistered &&
                   !isTableIdRegistered &&
+                  token &&
                   token.userId !== table.author &&
                   table.registeredUsers.length < table.nb_players && (
                     <SubscribeButton
@@ -101,10 +118,16 @@ const GetAllTables = () => {
                     onLeave={() => handleUnsubscribe(table.id, token.userId)}
                   />
                 )}
-
-                <div onClick={() => handleEditClick(table.id)}>
-                  <EditTableModal tableId={selectedTableId} />
-                </div>
+                {token && token.userId === table.author ? (
+                  <div className="composents_positions">
+                    <div onClick={() => handleEditClick(table.id)}>
+                      <EditTableModal tableId={selectedTableId} />
+                    </div>
+                    <DeleteButton
+                      onDelete={() => handleDeleteTable(table.id)}
+                    />
+                  </div>
+                ) : null}
               </div>
 
               <div className="composents_positions">

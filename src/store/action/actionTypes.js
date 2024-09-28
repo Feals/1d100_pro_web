@@ -20,3 +20,4 @@ export const REMOVED_USER_TO_TABLE = createActionTypes("REMOVED_USER_TO_TABLE");
 export const GET_DATES_WHERE_USER_REGISTERED = createActionTypes(
   "GET_DATES_WHERE_USER_REGISTERED"
 );
+export const DELETE_TABLE = createActionTypes("DELETE_TABLE");

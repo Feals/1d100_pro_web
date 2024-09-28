@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const UnsubscribeButton = ({ onLeave }) => {
   return (
     <GenericBoutton
-      actionType="leave"
+      actionType="red"
       onAction={onLeave}
       buttonLabel="Se désinscrire de la table"
     />

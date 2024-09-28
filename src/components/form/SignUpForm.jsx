@@ -1,12 +1,13 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signUp } from "../../store/action/authAction";
 import { SignupSchema } from "./validationSchemas";
 import FormContainer from "./formContainer";
 import FormField from "./formField";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const initialValues = {
     firstname: "",
     lastname: "",
@@ -14,9 +15,17 @@ const SignUpForm = () => {
     password: "",
   };
 
-  const handleSubmit = (values) => {
-    dispatch(signUp(values));
+  const { error: errorAuth } = useSelector((state) => state.auth);
+
+  const handleSubmit = async (values, { setFieldError }) => {
+    await dispatch(signUp(values, navigate));
+
+    if (errorAuth) {
+      setFieldError("mail", errorAuth);
+    }
   };
+
+  console.log("errorAuth", errorAuth);
 
   return (
     <FormContainer

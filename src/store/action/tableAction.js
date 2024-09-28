@@ -3,11 +3,13 @@ import {
   getAllTablesActions,
   updateTableActions,
   getTableByIdActions,
+  deleteTableActions,
 } from "./actionCreator";
 import {
   showSuccessToast,
   showErrorToast,
 } from "../../components/toast/toastService";
+import { closeModal } from "./modalAction";
 
 export const addTable = (userData) => {
   return async (dispatch) => {
@@ -29,6 +31,8 @@ export const addTable = (userData) => {
       const data = await response.json();
       dispatch(addTableActions.success(data));
       showSuccessToast("Table de JDR créée avec succès !");
+      dispatch(closeModal());
+      dispatch(getAllTables());
     } catch (error) {
       dispatch(addTableActions.failure(error.message));
       showErrorToast(error.message);
@@ -61,16 +65,14 @@ export const getAllTables = () => {
   };
 };
 
-export const updateTable = (userData) => {
+export const deleteTable = (id) => {
   return async (dispatch) => {
-    dispatch(updateTableActions.request());
+    dispatch(deleteTableActions.request());
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/rpgTables/${userData.tableId}`,
+        `${import.meta.env.VITE_API_URL}/rpgTables/${id}`,
         {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userData),
+          method: "DELETE",
         }
       );
 
@@ -79,8 +81,9 @@ export const updateTable = (userData) => {
       }
 
       const data = await response.json();
-      dispatch(updateTableActions.success(data));
-      showSuccessToast("Table mise à jour avec succès !");
+      dispatch(deleteTableActions.success(data));
+      showSuccessToast("La table à bien été supprimé !");
+      dispatch(getAllTables());
     } catch (error) {
       dispatch(updateTableActions.failure(error.message));
       showErrorToast(error.message);
@@ -109,6 +112,35 @@ export const getTableById = (id) => {
       dispatch(getTableByIdActions.success(table));
     } catch (error) {
       dispatch(getTableByIdActions.failure(error.message));
+    }
+  };
+};
+
+export const updateTable = (userData) => {
+  return async (dispatch) => {
+    dispatch(updateTableActions.request());
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/rpgTables/${userData.tableId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userData),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de la mise à jour d'une table de JDR");
+      }
+
+      const data = await response.json();
+      dispatch(updateTableActions.success(data));
+      showSuccessToast("Table mise à jour avec succès !");
+      dispatch(closeModal());
+      dispatch(getAllTables());
+    } catch (error) {
+      dispatch(updateTableActions.failure(error.message));
+      showErrorToast(error.message);
     }
   };
 };

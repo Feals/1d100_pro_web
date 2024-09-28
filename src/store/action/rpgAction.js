@@ -35,6 +35,7 @@ export const addRpg = (userData) => {
       const data = await response.json();
       dispatch(addRpgActions.success(data));
       showSuccessToast("Le JDR a été créé avec succès !");
+      dispatch(getAllRpgs());
     } catch (error) {
       dispatch(addRpgActions.failure(error.message));
       showErrorToast(error.message);
@@ -90,6 +91,7 @@ export const updateRpg = (userData) => {
       const data = await response.json();
       dispatch(updateRpgActions.success(data));
       showSuccessToast("Le JDR a été modifié avec succès !");
+      dispatch(getAllRpgs());
     } catch (error) {
       dispatch(updateRpgActions.failure(error.message));
     }

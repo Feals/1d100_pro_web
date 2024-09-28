@@ -59,7 +59,7 @@ h2 {
   padding: 20px;
 }
 
-#explication h2 {
+#expliexplanationcation h2 {
   position: relative;
   left: -20vw;
 }
@@ -69,7 +69,7 @@ h2 {
   left: 20vw;
 }
 
-#actus h2 {
+#current_events h2 {
   position: relative;
   left: -10vw;
 }
@@ -79,10 +79,10 @@ h2 {
     display: none;
   }
 
-  #explication h2 {
+  #explanation h2 {
     font-size: 1em;
   }
-  #explication h2 {
+  #explanation h2 {
     position: relative;
     left: -10vw;
   }
@@ -92,7 +92,7 @@ h2 {
     left: 10vw;
   }
 
-  #actus h2 {
+  #current_events h2 {
     position: relative;
     left: -10vw;
   }

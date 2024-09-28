@@ -1,0 +1,7 @@
+button img {
+  width: 2.5em;
+}
+.button_without_style {
+  background-color: transparent;
+  border: none;
+}

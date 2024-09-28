@@ -8,7 +8,7 @@ function Homepage() {
         <section>
           <div id="banniere_image"></div>
           <article>
-            <div id="explication" className="article_homePage left">
+            <div id="explanation" className="article_homePage left">
               <h2 className="homePage_title">LE JDR, C EST QUOI?</h2>
               <p className="article">
                 Int doloria nonsequam sum fuga. Namus et quias mo quasperio
@@ -70,7 +70,7 @@ function Homepage() {
               </div>
             </div>
 
-            <div id="actus" className="article_homePage left">
+            <div id="current_events" className="article_homePage left">
               <h2 className="homePage_title">NOS ACTUS</h2>
               <p className="article">
                 Int doloria non lab ipsanis tru eatem essitio Gia ius atis un ut

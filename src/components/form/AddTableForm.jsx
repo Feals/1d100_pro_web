@@ -34,7 +34,7 @@ const AddTableForm = ({ tableId }) => {
     name: "",
     description: "",
     nbPlayers: null,
-    rpgId: null,
+    rpgId: "",
     sessionDate: null,
     author: userId,
   });

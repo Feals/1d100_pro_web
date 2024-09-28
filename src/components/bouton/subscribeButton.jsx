@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const SubscribeButton = ({ onJoin }) => {
   return (
     <GenericBoutton
-      actionType="join"
+      actionType="green"
       onAction={onJoin}
       buttonLabel="S'inscrire à la table"
     />

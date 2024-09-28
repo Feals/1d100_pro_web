@@ -5,7 +5,7 @@ import {
   showErrorToast,
 } from "../../components/toast/toastService";
 
-export const signUp = (userData) => {
+export const signUp = (userData, navigate) => {
   return async (dispatch) => {
     dispatch(signUpActions.request());
 
@@ -20,12 +20,14 @@ export const signUp = (userData) => {
       );
 
       if (!response.ok) {
-        throw new Error("Erreur lors de l'inscription");
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Erreur lors de l'inscription");
       }
 
       const data = await response.json();
-      dispatch(signUpActions.success(data.token));
-
+      const decodedToken = jwtDecode(data.token);
+      dispatch(signInActions.success(decodedToken));
+      navigate("/");
       showSuccessToast("Votre compte a été créé avec succès !");
     } catch (error) {
       dispatch(signUpActions.failure(error.message));
