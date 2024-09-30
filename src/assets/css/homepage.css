@@ -81,8 +81,6 @@ h2 {
 
   #explanation h2 {
     font-size: 1em;
-  }
-  #explanation h2 {
     position: relative;
     left: -10vw;
   }
@@ -90,10 +88,12 @@ h2 {
   #planning h2 {
     position: relative;
     left: 10vw;
+    font-size: 1em;
   }
 
   #current_events h2 {
     position: relative;
     left: -10vw;
+    font-size: 1em;
   }
 }
